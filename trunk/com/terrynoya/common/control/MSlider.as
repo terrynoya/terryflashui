@@ -13,7 +13,8 @@ package com.terrynoya.common.control
 		private var _track:DisplayObject;
 		
 		private var _mouseDownPoint:Point;	
-		
+		private var _offsetPoint:Point;
+		private var _lstBarPoint:Point;
 		public function MSlider()
 		{
 			super();
@@ -29,6 +30,8 @@ package com.terrynoya.common.control
 			this._thumb.buttonSkin = MSkinManager.sliderThumbSkin;
 			this.addChild(this._thumb);
 			
+			this._lstBarPoint = new Point(0,0);
+			
 			this.addListeners();
 		} 
 		
@@ -40,7 +43,7 @@ package com.terrynoya.common.control
 		
 		private function onThumbPressHandler(e:MouseEvent):void
 		{
-			this._mouseDownPoint = new Point(e.stageX, e.stageY);
+			this._mouseDownPoint = this.globalToLocal(new Point(e.stageX, e.stageY));
 			this.addDragListener();
 		}
 		
@@ -58,14 +61,17 @@ package com.terrynoya.common.control
 		
 		private function onMouseMove(e:MouseEvent):void
 		{
-			trace("moving");
+			var p:Point = this.globalToLocal(new Point(e.stageX,e.stageY));
+			var dp:Point = p.subtract(this._mouseDownPoint);
+			this._offsetPoint = dp;
+			
+			this._thumb.x = this._offsetPoint.x + this._lstBarPoint.x;
 		}
 		
 		private function onMouseUp(e:MouseEvent):void
 		{
 			this.removeDragListener();
+			this._lstBarPoint = new Point(this._thumb.x, this._thumb.y);
 		}
-		
-		
 	}
 }
