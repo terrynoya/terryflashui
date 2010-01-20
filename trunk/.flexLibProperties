@@ -3,12 +3,13 @@
 <includeClasses>
 <classEntry path="com.terrynoya.common.core.MButtonPhase"/>
 <classEntry path="com.terrynoya.common.control.MLabel"/>
-<classEntry path="com.terrynoya.common.control.MSlider"/>
+<classEntry path="com.terrynoya.common.control.MVSlider"/>
 <classEntry path="com.terrynoya.common.control.MRadioButton"/>
 <classEntry path="com.terrynoya.util.HashMap"/>
 <classEntry path="com.terrynoya.common.control.MTextField"/>
 <classEntry path="com.terrynoya.common.skins.halo.MSkin"/>
 <classEntry path="com.terrynoya.common.control.MCheckBox"/>
+<classEntry path="com.terrynoya.common.control.MHSlider"/>
 <classEntry path="com.terrynoya.util.IHashMapEntry"/>
 <classEntry path="com.terrynoya.common.core.MSprite"/>
 <classEntry path="com.terrynoya.common.skins.halo.slider.MSliderTrackSkin"/>
@@ -17,6 +18,7 @@
 <classEntry path="com.terrynoya.common.skins.halo.MCheckBoxSkin"/>
 <classEntry path="com.terrynoya.common.control.MLabelButton"/>
 <classEntry path="com.terrynoya.common.control.MButton"/>
+<classEntry path="com.terrynoya.common.control.sliderClasses.MSliderDirection"/>
 <classEntry path="com.terrynoya.util.HashMapEntry"/>
 <classEntry path="com.terrynoya.common.skins.halo.MRadioButtonSkin"/>
 </includeClasses>
