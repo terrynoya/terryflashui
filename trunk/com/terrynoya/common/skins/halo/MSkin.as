@@ -3,7 +3,7 @@ package com.terrynoya.common.skins.halo
 	import flash.display.Graphics;
 	import flash.display.Shape;
 	import flash.geom.Matrix;
-
+	
 	import mx.utils.ColorUtil;
 	import mx.utils.GraphicsUtil;
 
@@ -20,7 +20,7 @@ package com.terrynoya.common.skins.halo
 		protected var themeColor:uint=0xfdff;
 		protected var derStyles:Object;
 		protected var themeColorDrk1:Number=ColorUtil.adjustBrightness2(themeColor, -25);
-
+		protected var borderColors:Array = [borderColor, 0x898b8d];
 		protected var borderColorDrk1:Number=ColorUtil.adjustBrightness2(borderColor, -50);
 
 		public function MSkin()
