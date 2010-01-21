@@ -3,7 +3,7 @@ package com.terrynoya.common.skins.halo
 	import flash.display.DisplayObject;
 	import flash.display.GradientType;
 
-	public class MButtonSkin extends MTrangleSkin
+	public class MButtonSkin extends MSkin
 	{
 		private var cr:Number=4;
 		private var cr1:Number=Math.max(0, cornerRadius - 1);

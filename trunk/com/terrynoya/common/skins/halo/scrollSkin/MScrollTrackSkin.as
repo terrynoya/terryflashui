@@ -12,25 +12,20 @@ package com.terrynoya.common.skins.halo.scrollSkin
 		{
 			super();
 			this.w = 15;
-			this.h = 100;
+			this.h = 10;
 			
-			var fillColors:Array = [0x94999b,0xe7e7e7];
-			// User-defined styles.
-//			var fillColors:Array = getStyle("trackColors");
-//			StyleManager.getColorNames(fillColors);
-//
-//			var borderColor:uint = ColorUtil.adjustBrightness2(getStyle("borderColor"), -20);
-//
-//			var borderColorDrk1:uint = ColorUtil.adjustBrightness2(borderColor, -30);
+			
+		}
 
-			graphics.clear();
+		override public function get upSkin():DisplayObject
+		{
+			this.graphics.clear();
+			var fillColors:Array = [0x94999b,0xe7e7e7];
+
+			graphics.clear(); 
 
 			var fillAlpha:Number = 1;
-
-//			if(name == "trackDisabledSkin" && FlexVersion.compatibilityVersion >= FlexVersion.VERSION_3_0)
-//				fillAlpha = .2;
-
-			// border
+			
 			drawRoundRect(
 				0, 0, w, h, 0,
 				[ borderColor, borderColorDrk1 ], fillAlpha,
@@ -43,11 +38,6 @@ package com.terrynoya.common.skins.halo.scrollSkin
 				1, 1, w - 2, h - 2, 0,
 				fillColors, fillAlpha, 
 				horizontalGradientMatrix(1, 1, w / 3 * 2, h - 2));
-		}
-
-		override public function get upSkin():DisplayObject
-		{
-
 			return this;
 		}
 
@@ -65,5 +55,6 @@ package com.terrynoya.common.skins.halo.scrollSkin
 		{
 			return this;
 		}
+
 	}
 }
