@@ -13,8 +13,6 @@ package com.terrynoya.common.skins.halo.scrollSkin
 			super();
 			this.w = 15;
 			this.h = 10;
-			
-			
 		}
 
 		override public function get upSkin():DisplayObject

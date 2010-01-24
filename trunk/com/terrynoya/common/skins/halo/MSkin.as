@@ -52,6 +52,16 @@ package com.terrynoya.common.skins.halo
 			this.draw();
 		} 
 		
+		override public function get height() : Number
+		{
+			return this.h;
+		}
+		
+		override public function get width() : Number
+		{
+			return this.w;
+		} 
+		
 		protected function draw():void
 		{
 			
