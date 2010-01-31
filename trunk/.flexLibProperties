@@ -28,6 +28,12 @@
     <classEntry path="com.terrynoya.common.control.MButton"/>
     <classEntry path="com.terrynoya.util.HashMapEntry"/>
     <classEntry path="com.terrynoya.common.control.scrollClasses.MScrollThumb"/>
+    <classEntry path="com.terrynoya.common.control.MVScrollBar"/>
+    <classEntry path="com.terrynoya.common.control.scrollClasses.MScrollDirection"/>
+    <classEntry path="com.terrynoya.common.control.MHScrollBar"/>
+    <classEntry path="com.terrynoya.common.core.MScrollControlBase"/>
+    <classEntry path="com.terrynoya.common.control.scrollClasses.MScrollBarPolicy"/>
+    <classEntry path="com.terrynoya.common.events.MScrollEvent"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

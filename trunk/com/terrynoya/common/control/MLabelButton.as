@@ -9,7 +9,7 @@ package com.terrynoya.common.control
 			super();
 		}
 		
-		override protected function addChildren():void
+		override protected function createChildren():void
 		{
 			this._label = new MLabel();
 			this.addChild(this._label);

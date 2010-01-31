@@ -35,7 +35,7 @@ package com.terrynoya.common.control
 			return this._textField.htmlText;
 		}
 
-		override protected function addChildren():void
+		override protected function createChildren():void
 		{
 			this._textField=new MTextField();
 			this._textField.autoSize=TextFieldAutoSize.LEFT;

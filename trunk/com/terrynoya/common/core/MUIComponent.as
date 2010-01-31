@@ -10,14 +10,14 @@ package com.terrynoya.common.core
 		public function MUIComponent()
 		{
 			super();
-			this.addChildren();
+			this.createChildren();
 		}
 
-		protected function addChildren():void
+		protected function createChildren():void
 		{
 			
 		}
-
+		
 		public function set color(value:uint):void
 		{
 			this._color=value;

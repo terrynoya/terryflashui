@@ -2,6 +2,7 @@ package com.terrynoya.common.control.scrollClasses
 {
 	import com.terrynoya.common.control.MButton;
 	import com.terrynoya.common.core.MUIComponent;
+	import com.terrynoya.common.events.MScrollEvent;
 	import com.terrynoya.common.skins.halo.scrollSkin.MScrollDownArrowSkin;
 	import com.terrynoya.common.skins.halo.scrollSkin.MScrollThumbSkin;
 	import com.terrynoya.common.skins.halo.scrollSkin.MScrollTrackSkin;
@@ -9,7 +10,9 @@ package com.terrynoya.common.control.scrollClasses
 	
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
-
+	
+	[Event(name="scroll",type="com.terrynoya.common.events.MScrollEvent")]
+	
 	public class MScrollBar extends MUIComponent
 	{
 		protected var upArrow:MButton;
@@ -23,8 +26,9 @@ package com.terrynoya.common.control.scrollClasses
 		private var _minimun:Number;
 
 		private var _maximun:Number;
-
-
+		
+		private var _direction:String;
+		
 		private var _mousedownPoint:Point;
 
 		private var _lstBarPoint:Point;
@@ -33,7 +37,9 @@ package com.terrynoya.common.control.scrollClasses
 
 		private var _pageSize:Number=10;
 		
+		private var _value:Number;
 		
+		private var _snapInterval:Number = 1;
 		
 		public function MScrollBar()
 		{
@@ -43,6 +49,16 @@ package com.terrynoya.common.control.scrollClasses
 			this._minimun=1;
 			this._maximun=70;
 			this._pageSize=40;
+		}
+		
+		public function get direction():String
+		{
+			return this._direction;
+		}
+		
+		public function set direction(value:String):void
+		{
+			this._direction = value; 
 		}
 		
 		public function set pageSize(value:Number):void
@@ -61,7 +77,7 @@ package com.terrynoya.common.control.scrollClasses
 			return this._pageSize;
 		}
 		
-		override protected function addChildren():void
+		override protected function createChildren():void
 		{
 			this.upArrow=new MButton();
 			this.upArrow.buttonSkin=new MScrollUpArrowSkin();
@@ -141,7 +157,7 @@ package com.terrynoya.common.control.scrollClasses
 
 		private function onThumbPressHandler(e:MouseEvent):void
 		{
-			this._mousedownPoint=new Point(e.stageX, e.stageY);
+			this._mousedownPoint=this.globalToLocal(new Point(e.stageX, e.stageY));
 
 			this.addThumbDragListener();
 		}
@@ -160,7 +176,7 @@ package com.terrynoya.common.control.scrollClasses
 
 		private function onThumbMove(e:MouseEvent):void
 		{
-			var p:Point=new Point(e.stageX, e.stageY);
+			var p:Point=this.globalToLocal(new Point(e.stageX, e.stageY));
 			var dp:Point=p.subtract(this._mousedownPoint);
 
 			var ty:Number=dp.y + this._lstBarPoint.y;
@@ -178,15 +194,18 @@ package com.terrynoya.common.control.scrollClasses
 
 			this.thumb.y=ty;
 			
-			this.getColByY();
+			var val:Number = this.getColByY();
+			
+			var evt:MScrollEvent = new MScrollEvent(MScrollEvent.SCROLL,val,this.direction);
+			this.dispatchEvent(evt);
 		}
 		
 		
-		private function getColByY():void
+		private function getColByY():Number
 		{
 			var offsetX:Number = thumb.y - this.track.y;
 			var val:Number = offsetX / this.track.height * (this.maximum - this.minimun);
-			trace(val, this.maximum - this.minimun);
+			return val;
 		}
 
 		private function onThumbUp(e:MouseEvent):void

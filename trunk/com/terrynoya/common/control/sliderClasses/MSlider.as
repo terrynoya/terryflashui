@@ -44,7 +44,7 @@ package com.terrynoya.common.control.sliderClasses
 			this._snapInterval = value;
 		}
 		
-		override protected function addChildren():void
+		override protected function createChildren():void
 		{
 			this._track = MSkinManager.sliderTrackSkin;
 			this.addChild(this._track);
