@@ -54,7 +54,7 @@ package com.terrynoya.common.core
 		
 		protected function scrollHandler(e:MScrollEvent):void
 		{
-			trace(e.scrollPosition ,e.direction);
+			
 		}
 		
 		private function get vScrollShouldVisible():Boolean

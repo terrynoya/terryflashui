@@ -34,6 +34,10 @@
     <classEntry path="com.terrynoya.common.core.MScrollControlBase"/>
     <classEntry path="com.terrynoya.common.control.scrollClasses.MScrollBarPolicy"/>
     <classEntry path="com.terrynoya.common.events.MScrollEvent"/>
+    <classEntry path="com.terrynoya.common.control.MList"/>
+    <classEntry path="com.terrynoya.common.core.IMItemRenderer"/>
+    <classEntry path="com.terrynoya.common.core.MItemRenderer"/>
+    <classEntry path="com.terrynoya.common.control.listClasses.MListItemRenderer"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
