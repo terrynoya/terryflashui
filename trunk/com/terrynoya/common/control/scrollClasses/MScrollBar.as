@@ -37,7 +37,7 @@ package com.terrynoya.common.control.scrollClasses
 
 		private var _pageSize:Number=10;
 		
-		private var _value:Number;
+		private var _value:Number = 0;
 		
 		private var _snapInterval:Number = 1;
 		
@@ -49,6 +49,11 @@ package com.terrynoya.common.control.scrollClasses
 			this._minimun=1;
 			this._maximun=70;
 			this._pageSize=40;
+		}
+		
+		public function scrollPosition():Number
+		{
+			return this._value;
 		}
 		
 		public function get direction():String
@@ -196,8 +201,12 @@ package com.terrynoya.common.control.scrollClasses
 			
 			var val:Number = this.getColByY();
 			
-			var evt:MScrollEvent = new MScrollEvent(MScrollEvent.SCROLL,val,this.direction);
-			this.dispatchEvent(evt);
+			if(val != this._value)
+			{
+				this._value = val;
+				var evt:MScrollEvent = new MScrollEvent(MScrollEvent.SCROLL,val,this.direction);
+				this.dispatchEvent(evt);
+			}
 		}
 		
 		

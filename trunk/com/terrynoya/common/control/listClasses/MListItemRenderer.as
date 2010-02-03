@@ -10,7 +10,7 @@ package com.terrynoya.common.control.listClasses
 		private var playTransitions:Boolean=true;
 		private var _rollOverColor:uint=0xb2e1ff;
 		private var _selectedColor:uint=0xb2e1ff;
-
+		
 		protected var label:MLabel;
 
 		public function MListItemRenderer()
@@ -34,7 +34,8 @@ package com.terrynoya.common.control.listClasses
 		{
 			this._rollOverColor=value;
 		}
-
+		
+		
 		override public function set data(value:Object):void
 		{
 			super.data=value;
@@ -73,6 +74,8 @@ package com.terrynoya.common.control.listClasses
 
 		private function drawBackground(w:Number, h:Number):void
 		{
+			
+			trace("this.width, this.height",this.width, this.height);
 			var g:Graphics=this.graphics;
 			g.clear();
 

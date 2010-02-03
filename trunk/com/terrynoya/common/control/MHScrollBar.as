@@ -23,15 +23,14 @@ package com.terrynoya.common.control
 			super.width = value;
 		}
 		
-//		override public function get width() :Number
-//		{
-//			return super.height;
-//		}
-//		
-//		override public function get height() :Number
-//		{
-//			return super.width;
-//		}
+		override public function get width() :Number
+		{
+			return super.height;
+		}
 		
+		override public function get height() :Number
+		{
+			return super.width;
+		}
 	}
 }

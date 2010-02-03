@@ -13,6 +13,7 @@ package com.terrynoya.common.core
 		public function MItemRenderer()
 		{
 			super();
+			this.addHandlers();
 		}
 
 
