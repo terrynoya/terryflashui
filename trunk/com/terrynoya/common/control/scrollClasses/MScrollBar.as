@@ -7,6 +7,7 @@ package com.terrynoya.common.control.scrollClasses
 	import com.terrynoya.common.skins.halo.scrollSkin.MScrollThumbSkin;
 	import com.terrynoya.common.skins.halo.scrollSkin.MScrollTrackSkin;
 	import com.terrynoya.common.skins.halo.scrollSkin.MScrollUpArrowSkin;
+	import com.terrynoya.common.util.MNumberUtil;
 	
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
@@ -39,14 +40,14 @@ package com.terrynoya.common.control.scrollClasses
 		
 		private var _value:Number = 0;
 		
-		private var _snapInterval:Number = 1;
+		private var _snapInterval:Number = 0.2;
 		
 		public function MScrollBar()
 		{
 			super();
 			this.addListeners();
 			this._lstBarPoint=new Point(0, 0);
-			this._minimun=1;
+			this._minimun=0;
 			this._maximun=70;
 			this._pageSize=40;
 		}
@@ -198,8 +199,7 @@ package com.terrynoya.common.control.scrollClasses
 			}
 
 			this.thumb.y=ty;
-			
-			var val:Number = this.getColByY();
+			var val:Number = this.getValueByPos();
 			
 			if(val != this._value)
 			{
@@ -210,11 +210,33 @@ package com.terrynoya.common.control.scrollClasses
 		}
 		
 		
-		private function getColByY():Number
+		private function getValueByPos():Number
 		{
 			var offsetX:Number = thumb.y - this.track.y;
-			var val:Number = offsetX / this.track.height * (this.maximum - this.minimun);
-			return val;
+			var val:Number = offsetX / (this.track.height - this.thumb.height) * (this.maximum - this.minimun);
+			var rlt:Number = val + this.minimun;
+			
+			
+			//calulate snapInterval
+			if(isNaN(this._snapInterval) || this._snapInterval <= 0)
+			{
+				this._value = rlt;
+			}
+			else if(this._snapInterval > 0 && this._snapInterval < 1)
+			{
+				var pow:Number = Math.pow(10, MNumberUtil.getPrecision(this._snapInterval));
+				var snap:Number = _snapInterval * pow;
+				var rounded:Number = Math.round(rlt * pow);
+				var snapped:Number = Math.round(rounded / snap) * snap;
+				var v:Number = snapped / pow;
+				rlt = Math.max(this._minimun, Math.min(this._maximun, v));
+			}
+			else if(this._snapInterval >= 1)
+			{
+				rlt = Math.round((rlt - this._minimun) / _snapInterval) * _snapInterval + this._minimun;
+				this._value = rlt;
+			}
+			return rlt;
 		}
 
 		private function onThumbUp(e:MouseEvent):void

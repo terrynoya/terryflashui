@@ -2,6 +2,7 @@ package com.terrynoya.common.control.sliderClasses
 {
 	import com.terrynoya.common.control.MButton;
 	import com.terrynoya.common.core.MUIComponent;
+	import com.terrynoya.common.util.MNumberUtil;
 	import com.terrynoya.manager.MSkinManager;
 	
 	import flash.display.DisplayObject;
@@ -89,12 +90,7 @@ package com.terrynoya.common.control.sliderClasses
 
 			this._offsetPoint = dp;
 
-
 			var dx:Number = this._lstBarPoint.x + this._offsetPoint.x;
-
-
-
-
 
 			this._thumb.x = this._offsetPoint.x + this._lstBarPoint.x;
 
@@ -128,7 +124,7 @@ package com.terrynoya.common.control.sliderClasses
 			}
 			else if(this._snapInterval > 0 && this._snapInterval < 1)
 			{
-				var pow:Number = Math.pow(10, getPrecision(this._snapInterval));
+				var pow:Number = Math.pow(10, MNumberUtil.getPrecision(this._snapInterval));
 				var snap:Number = _snapInterval * pow;
 				var rounded:Number = Math.round(v * pow);
 				var snapped:Number = Math.round(rounded / snap) * snap;
@@ -174,20 +170,5 @@ package com.terrynoya.common.control.sliderClasses
 			this.removeDragListener();
 			this._lstBarPoint = new Point(this._thumb.x, this._thumb.y);
 		}
-		
-		 /**
-         * 检测小数点位数 0.01 -> 2
-         * @param num
-         * @return
-         */
-        protected function getPrecision(num:Number):Number
-        {
-            var s:String = num.toString();
-            if (s.indexOf(".") == -1)
-            {
-                return 0;
-            }
-            return s.split(".").pop().length;
-        }
 	}
 }
