@@ -1,7 +1,7 @@
 package com.terrynoya.common.core
 {
 	use namespace melon_internal;
-	import com.terrynoya.manager.MStyleManager;
+	import com.terrynoya.common.manager.MStyleManager;
 
 	public class MUIComponent extends MSprite
 	{

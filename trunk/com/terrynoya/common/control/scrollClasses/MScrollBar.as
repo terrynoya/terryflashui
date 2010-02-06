@@ -230,7 +230,7 @@ package com.terrynoya.common.control.scrollClasses
 				var snapped:Number = Math.round(rounded / snap) * snap;
 				var v:Number = snapped / pow;
 				rlt = Math.max(this._minimun, Math.min(this._maximun, v));
-			}
+			} 
 			else if(this._snapInterval >= 1)
 			{
 				rlt = Math.round((rlt - this._minimun) / _snapInterval) * _snapInterval + this._minimun;

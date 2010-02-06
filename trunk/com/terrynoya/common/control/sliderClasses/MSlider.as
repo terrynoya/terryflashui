@@ -3,7 +3,7 @@ package com.terrynoya.common.control.sliderClasses
 	import com.terrynoya.common.control.MButton;
 	import com.terrynoya.common.core.MUIComponent;
 	import com.terrynoya.common.util.MNumberUtil;
-	import com.terrynoya.manager.MSkinManager;
+	import com.terrynoya.common.manager.MSkinManager;
 	
 	import flash.display.DisplayObject;
 	import flash.events.MouseEvent;

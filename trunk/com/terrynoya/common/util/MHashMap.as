@@ -1,4 +1,4 @@
-package com.terrynoya.util
+package com.terrynoya.common.util
 {
 	import flash.utils.Dictionary;
 	

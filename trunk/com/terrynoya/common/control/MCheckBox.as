@@ -1,7 +1,7 @@
 package com.terrynoya.common.control
 {
 	import com.terrynoya.common.skins.halo.MCheckBoxSkin;
-	import com.terrynoya.manager.MSkinManager;
+	import com.terrynoya.common.manager.MSkinManager;
 	
 	import flash.display.DisplayObject;
 	import flash.events.MouseEvent;

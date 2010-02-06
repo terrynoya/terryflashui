@@ -1,4 +1,4 @@
-package com.terrynoya.manager
+package com.terrynoya.common.manager
 {
 	import com.terrynoya.common.core.melon_internal;
 

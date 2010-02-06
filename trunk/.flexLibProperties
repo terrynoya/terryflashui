@@ -39,6 +39,7 @@
     <classEntry path="com.terrynoya.common.core.MItemRenderer"/>
     <classEntry path="com.terrynoya.common.control.listClasses.MListItemRenderer"/>
     <classEntry path="com.terrynoya.common.util.MNumberUtil"/>
+    <classEntry path="com.terrynoya.common.control.MComboBox"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
