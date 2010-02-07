@@ -10,11 +10,11 @@ package com.terrynoya.common.core
 	
 	public class MScrollControlBase extends MUIComponent
 	{
-		protected var vScrollBar:MVScrollBar;
+		private var vScrollBar:MVScrollBar;
 		
-		protected var hScrollBar:MHScrollBar;
+		private var hScrollBar:MHScrollBar;
 		
-		protected var vScrollPolicy:String = MScrollBarPolicy.ON;
+		protected var vScrollPolicy:String = MScrollBarPolicy.AUTO;
 		
 		protected var hScrollPolicy:String = MScrollBarPolicy.OFF;
 		
@@ -24,12 +24,36 @@ package com.terrynoya.common.core
 		
 		private var _visualHeight:Number = 100;
 		
+		private var _vScroll_Maximum:Number;
+		
+		private var _vScroll_pageSize:Number;
+		
 		public function MScrollControlBase()
 		{
 			super();
 			this.addListeners();
 		} 
 		
+		protected function set vScroll_Maximum(value:Number):void
+		{
+			this.vScrollBar.maximum = value;		
+		}
+		
+		protected function set vScroll_pageSize(value:Number):void
+		{
+			this.vScrollBar.pageSize = value;		
+		}
+		
+		protected function set vScroll_snapInerval(value:Number):void
+		{
+			this.vScrollBar.snapInerval = value;	
+		}
+		
+		protected function get vScroll_scrollPosition():Number
+		{
+			return this.vScrollBar.scrollPosition;	
+		}
+			
 		override public function set width(value:Number) : void
 		{
 			this._visualWidth = value;
@@ -81,9 +105,7 @@ package com.terrynoya.common.core
 		protected function layoutBar(w:Number,h:Number):void
 		{
 			
-			this.vScrollBar.visible = this.vScrollShouldVisible;
-			this.hScrollBar.visible = this.hScrollShouldVisible;
-			
+			this.updateScrollVisible();
 			if(this.vScrollShouldVisible && this.hScrollShouldVisible)
 			{
 				w -= this.vScrollBar.width;	
@@ -99,6 +121,12 @@ package com.terrynoya.common.core
 			this.updateMsk(w,h);
 		}
 		
+		protected function updateScrollVisible():void
+		{
+			this.vScrollBar.visible = this.vScrollShouldVisible;
+			this.hScrollBar.visible = this.hScrollShouldVisible;
+		}
+		
 		/**
 		 *	ON始终可见
 		 *  AUTO当最大滚动距离大于可视距离时可见
@@ -107,13 +135,13 @@ package com.terrynoya.common.core
 		private function get vScrollShouldVisible():Boolean
 		{
 			return this.vScrollPolicy == MScrollBarPolicy.ON ||
-				(this.vScrollPolicy == MScrollBarPolicy.AUTO && this.vScrollBar.maximum > this.vScrollBar.pageSize);
+				(this.vScrollPolicy == MScrollBarPolicy.AUTO && this.vScrollBar.maximum > 0);
 		}
 		
 		private function get hScrollShouldVisible():Boolean
 		{
 			return this.hScrollPolicy == MScrollBarPolicy.ON ||
-				(this.hScrollPolicy == MScrollBarPolicy.AUTO && this.vScrollBar.maximum > this.vScrollBar.pageSize);
+				(this.hScrollPolicy == MScrollBarPolicy.AUTO && this.vScrollBar.maximum > 0);
 		}
 		
 		private function updateMsk(w:Number, h:Number):void

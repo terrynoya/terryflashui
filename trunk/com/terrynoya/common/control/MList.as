@@ -120,14 +120,16 @@ package com.terrynoya.common.control
 			{
 				return;
 			}
-			this.vScrollBar.maximum = (Math.max(this.length , this.rowCount) - this.rowCount) * this.rowHeight;
-			this.vScrollBar.pageSize = this.rowCount * this.rowHeight;
-			this.vScrollBar.snapInerval = this.rowHeight;
 			
-			this.layoutBar(rendererWidth,Math.min(this.length , this.rowCount) * this._rowHeight);
+			this.vScroll_Maximum = (Math.max(this.length , this.rowCount) - this.rowCount) * this.rowHeight;
+			this.vScroll_pageSize = this.rowCount * this.rowHeight;
+			this.vScroll_snapInerval = this.rowHeight;
+			
 			this.removeRenderers();
+			  
+			this.updateScrollVisible();
 			 
-			var currCol:int= this.vScrollBar.scrollPosition / this._rowHeight;
+			var currCol:int= this.vScroll_scrollPosition / this._rowHeight;
 			var maxCol:Number=Math.min(currCol + this.rowCount, this.length);
 			var renderArr:Array=[];
 			var rowCount:int=0;
@@ -184,7 +186,6 @@ package com.terrynoya.common.control
 				return isNaN(this._visualWidth) ? this.maxRendererWidth : this._visualWidth;	
 			}
 		}
-
 
 		private function removeRenderers():void
 		{
