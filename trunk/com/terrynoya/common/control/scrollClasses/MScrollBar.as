@@ -49,7 +49,7 @@ package com.terrynoya.common.control.scrollClasses
 			this._lstBarPoint=new Point(0, 0);
 		}
 		
-		public function scrollPosition():Number
+		public function get scrollPosition():Number
 		{
 			return this._value;
 		}
@@ -57,6 +57,16 @@ package com.terrynoya.common.control.scrollClasses
 		public function get direction():String
 		{
 			return this._direction;
+		}
+		
+		public function get snapInerval():Number
+		{
+			return this._snapInterval;
+		}
+		
+		public function set snapInerval(value:Number):void
+		{
+			this._snapInterval = value;
 		}
 		
 		public function set direction(value:String):void
@@ -142,8 +152,13 @@ package com.terrynoya.common.control.scrollClasses
 		
 		private function updateView():void
 		{
+			if(this.maximum <= 0)
+			{
+				this.thumb.visible = false;
+				return;
+			}
 			var totalpage:Number=Math.round((this._maximun - this.minimun) / this._pageSize);
-			this.thumb.height=this.track.height / totalpage;
+			this.thumb.height=this.track.height / (totalpage + 1);
 		}
 
 		override public function set height(value:Number):void

@@ -50,12 +50,28 @@ package com.terrynoya.common.control
 		public function set rowCount(value:int):void
 		{
 			this._rowCount = value;
-			this.layoutBar(rendererWidth,this.rowCount * this._rowHeight);
+			this.updateView();
+		}
+		
+		public function get rowHeight():Number
+		{
+			return this._rowHeight;
+		}
+		
+		public function set rowHeight(value:Number):void
+		{
+			if(this.rowHeight == value)
+			{
+				return;
+			}
+			this._rowHeight = value;
+			this.updateView();
 		}
 		
 		public function set dataProvider(value:MArrayCollection):void
 		{
 			this._dataProvider=value;
+			this.layoutBar(rendererWidth,Math.min(this.length , this.rowCount) * this._rowHeight);
 			this.updateView();
 		}
 
@@ -91,6 +107,10 @@ package com.terrynoya.common.control
 		 */
 		public function get length():uint
 		{
+			if(!this._dataProvider)
+			{
+				return 0;
+			}
 			return this._dataProvider.length;
 		}
 
@@ -100,20 +120,22 @@ package com.terrynoya.common.control
 			{
 				return;
 			}
-
+			this.vScrollBar.maximum = (Math.max(this.length , this.rowCount) - this.rowCount) * this.rowHeight;
+			this.vScrollBar.pageSize = this.rowCount * this.rowHeight;
+			this.vScrollBar.snapInerval = this.rowHeight;
+			
+			this.layoutBar(rendererWidth,Math.min(this.length , this.rowCount) * this._rowHeight);
 			this.removeRenderers();
-			
-			
-			var currCol:int=int(this.vScrollBar.scrollPosition / this._rowHeight);
+			 
+			var currCol:int= this.vScrollBar.scrollPosition / this._rowHeight;
 			var maxCol:Number=Math.min(currCol + this.rowCount, this.length);
 			var renderArr:Array=[];
 			var rowCount:int=0;
 			
-			trace("currCol",currCol,"maxCol",maxCol);
 			var arr:Array=this._dataProvider.toArray();
 
 			for (var i:int=currCol; i < maxCol; i++)
-			{
+			{ 
 				var itemRenderer:MItemRenderer=MItemRenderer(this._rendererPool.getObject());
 				itemRenderer.data=arr[i];
 				itemRenderer.y=rowCount * this._rowHeight;
@@ -127,15 +149,11 @@ package com.terrynoya.common.control
 //
 			this.ajustRendererWidth(renderArr);
 			
-//			this.layoutBar(rendererWidth,this.rowCount * this._rowHeight);
-			
 		}
 		
 		
 		override protected function scrollHandler(e:MScrollEvent) : void
 		{
-//			trace(e.scrollPosition);
-//			this.vScrollBar.scrollPosition()
 			this.updateView();
 		}
 

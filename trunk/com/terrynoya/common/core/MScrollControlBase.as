@@ -107,13 +107,13 @@ package com.terrynoya.common.core
 		private function get vScrollShouldVisible():Boolean
 		{
 			return this.vScrollPolicy == MScrollBarPolicy.ON ||
-				(this.vScrollPolicy == MScrollBarPolicy.AUTO && this.vScrollBar.maximum > 0);
+				(this.vScrollPolicy == MScrollBarPolicy.AUTO && this.vScrollBar.maximum > this.vScrollBar.pageSize);
 		}
 		
 		private function get hScrollShouldVisible():Boolean
 		{
 			return this.hScrollPolicy == MScrollBarPolicy.ON ||
-				(this.hScrollPolicy == MScrollBarPolicy.AUTO && this.hScrollBar.maximum > 0);
+				(this.hScrollPolicy == MScrollBarPolicy.AUTO && this.vScrollBar.maximum > this.vScrollBar.pageSize);
 		}
 		
 		private function updateMsk(w:Number, h:Number):void
