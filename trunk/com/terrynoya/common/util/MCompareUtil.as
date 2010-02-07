@@ -21,7 +21,7 @@ package com.terrynoya.common.util
 						compareFunction = dateCompare;
 					}
 					else
-					{ 
+					{  
 						compareFunction = stringCompare;
 						var test:String;
 						try

@@ -2,7 +2,7 @@ package com.terrynoya.common.core
 {
 	import flash.display.Sprite;
 
-	public class MSprite extends Sprite
+	public class MSprite extends Sprite implements IMDisplayObject
 	{
 		protected var _toolTip:String;
 		

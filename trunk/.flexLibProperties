@@ -52,6 +52,10 @@
     <classEntry path="com.terrynoya.common.collection.MListCollectionView"/>
     <classEntry path="com.terrynoya.common.collection.MArrayCollection"/>
     <classEntry path="com.terrynoya.common.events.MSliderEvent"/>
+    <classEntry path="com.terrynoya.common.control.listClasses.MItemRendererWraper"/>
+    <classEntry path="com.terrynoya.common.util.MObjectPoolManager"/>
+    <classEntry path="com.terrynoya.common.control.listClasses.MListItemRenderer2"/>
+    <classEntry path="com.terrynoya.common.core.IMDisplayObject"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

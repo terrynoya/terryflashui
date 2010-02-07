@@ -1,12 +1,13 @@
 package com.terrynoya.common.control
 {
 	import com.terrynoya.common.collection.MArrayCollection;
+	import com.terrynoya.common.control.listClasses.MItemRendererWraper;
 	import com.terrynoya.common.control.listClasses.MListItemRenderer;
-	import com.terrynoya.common.core.MItemRenderer;
+	import com.terrynoya.common.control.listClasses.MListItemRenderer2;
 	import com.terrynoya.common.core.MScrollControlBase;
 	import com.terrynoya.common.core.MSprite;
 	import com.terrynoya.common.events.MScrollEvent;
-	import com.terrynoya.common.util.MObjectPool;
+	import com.terrynoya.common.util.MObjectPoolManager;
 	
 	import flash.display.DisplayObject;
 
@@ -17,8 +18,6 @@ package com.terrynoya.common.control
 		private var _rowCount:int;
 
 		private var _rowHeight:Number=30;
-
-		private var _rendererPool:MObjectPool;
 
 		private var _contentHolder:MSprite;
 
@@ -34,7 +33,6 @@ package com.terrynoya.common.control
 		public function MList()
 		{
 			super();
-			this._rendererPool=new MObjectPool(MListItemRenderer);
 			this.rowCount = 3;
 		}
 
@@ -113,6 +111,8 @@ package com.terrynoya.common.control
 			}
 			return this._dataProvider.length;
 		}
+		
+		private var renderArr:Array=[];
 
 		protected function updateView():void
 		{
@@ -131,28 +131,25 @@ package com.terrynoya.common.control
 			 
 			var currCol:int= this.vScroll_scrollPosition / this._rowHeight;
 			var maxCol:Number=Math.min(currCol + this.rowCount, this.length);
-			var renderArr:Array=[];
+			
 			var rowCount:int=0;
 			
 			var arr:Array=this._dataProvider.toArray();
 
 			for (var i:int=currCol; i < maxCol; i++)
 			{ 
-				var itemRenderer:MItemRenderer=MItemRenderer(this._rendererPool.getObject());
-				itemRenderer.data=arr[i];
-				itemRenderer.y=rowCount * this._rowHeight;
-				this._contentHolder.addChild(DisplayObject(itemRenderer));
+				var wraper:MItemRendererWraper=MObjectPoolManager.getObject(MItemRendererWraper);
+				wraper.itemRender = MObjectPoolManager.getObject(MListItemRenderer2);
+				wraper.data=arr[i]; 
+				wraper.y=rowCount * this._rowHeight;
+				this._contentHolder.addChild(DisplayObject(wraper.itemRender));
 
-				this.maxRendererWidth=Math.max(this.maxRendererWidth, itemRenderer.width);
-				
-				renderArr.push(itemRenderer);
+				this.maxRendererWidth=Math.max(this.maxRendererWidth, wraper.width);
+				renderArr.push(wraper);
 				rowCount++;
 			}
-//
 			this.ajustRendererWidth(renderArr);
-			
 		}
-		
 		
 		override protected function scrollHandler(e:MScrollEvent) : void
 		{
@@ -165,16 +162,17 @@ package com.terrynoya.common.control
 		 */
 		private function ajustRendererWidth(renderArr:Array):void
 		{
-			//如果用户设置了width，则按用户的width显示，否则按照单元格中的最大宽度绘制
+			
 			for (var i:int=0; i < renderArr.length; ++i)
 			{
-				var render:DisplayObject=DisplayObject(renderArr[i]);
-//				render.visible = false;
+				var render:DisplayObject=DisplayObject(renderArr[i].itemRender);
 				render.width=rendererWidth;
 				render.height = this._rowHeight;
 			}
 		}
 		
+		
+		//如果用户设置了width，则按用户的width显示，否则按照单元格中的最大宽度绘制
 		private function get rendererWidth():Number
 		{
 			if(isNaN(this._visualWidth) && isNaN(this.maxRendererWidth))
@@ -190,11 +188,16 @@ package com.terrynoya.common.control
 		private function removeRenderers():void
 		{
 			//this._contentHolder.removeAllChildren
-			for (var i:int=this._contentHolder.numChildren - 1; i >= 0; i--)
+			while(renderArr.length>0)
 			{
-				this._rendererPool.recycleObject(this._contentHolder.removeChildAt(i));
+				var wrapper:MItemRendererWraper = renderArr.pop();
+				MObjectPoolManager.recycleObject(MItemRendererWraper,wrapper);
+				MObjectPoolManager.recycleObject(MListItemRenderer2,this._contentHolder.removeChild(DisplayObject(wrapper.itemRender)));
 			}
+//			for (var i:int=this.renderArr.numChildren - 1; i >= 0; i--)
+//			{
+//				MObjectPoolManager.recycleObject(MListItemRenderer,this._contentHolder.removeChildAt(i));
+//			}
 		}
-
 	}
 }
