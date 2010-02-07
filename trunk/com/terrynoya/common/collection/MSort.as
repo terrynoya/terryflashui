@@ -30,7 +30,14 @@ package com.terrynoya.common.collection
 			
 			if(sortOpts.hasFields)
 			{
-				items.sortOn(sortOpts.fields,sortOpts.options);
+				try
+				{
+					items.sortOn(sortOpts.fields,sortOpts.options);
+				}
+				catch(error:Error)
+				{
+					trace(error.message);
+				}
 			}
 			else
 			{

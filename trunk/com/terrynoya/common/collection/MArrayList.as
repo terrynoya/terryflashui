@@ -111,8 +111,7 @@ package com.terrynoya.common.collection
 			}
 			else
 			{
-				throw new TypeError("Error: Type Coercion failed: cannot convert " + obj + " to Array or DataProvider.");
-				return null;
+				rltArr.push(obj);
 			}
 			return rltArr;
 		}

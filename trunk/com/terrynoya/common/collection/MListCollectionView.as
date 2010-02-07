@@ -84,7 +84,7 @@ package com.terrynoya.common.collection
 				return true;
 			}
 			return false;
-		} 
+		}  
 
 		public function addItem(item:Object):void
 		{
