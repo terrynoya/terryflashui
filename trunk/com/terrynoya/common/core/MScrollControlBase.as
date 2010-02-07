@@ -14,7 +14,7 @@ package com.terrynoya.common.core
 		
 		protected var hScrollBar:MHScrollBar;
 		
-		protected var vScrollPolicy:String = MScrollBarPolicy.AUTO;
+		protected var vScrollPolicy:String = MScrollBarPolicy.ON;
 		
 		protected var hScrollPolicy:String = MScrollBarPolicy.OFF;
 		
@@ -64,6 +64,7 @@ package com.terrynoya.common.core
 			this.hScrollBar = new MHScrollBar();
 			this.addChild(this.vScrollBar);
 			this.addChild(this.hScrollBar);
+			
 		}
 		
 		private function addListeners():void

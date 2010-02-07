@@ -24,32 +24,29 @@ package com.terrynoya.common.control.scrollClasses
 
 		protected var thumb:MButton;
 
-		private var _minimun:Number;
+		private var _minimun:Number = 0;
 
-		private var _maximun:Number;
+		private var _maximun:Number = 10;
 		
 		private var _direction:String;
 		
 		private var _mousedownPoint:Point;
-
+		
 		private var _lstBarPoint:Point;
 
 		private var _offsetPoint:Point;
 
-		private var _pageSize:Number=10;
+		private var _pageSize:Number=5;
 		
 		private var _value:Number = 0;
 		
-		private var _snapInterval:Number = 0.2;
+		private var _snapInterval:Number;
 		
 		public function MScrollBar()
 		{
-			super();
+			super(); 
 			this.addListeners();
 			this._lstBarPoint=new Point(0, 0);
-			this._minimun=0;
-			this._maximun=70;
-			this._pageSize=40;
 		}
 		
 		public function scrollPosition():Number
@@ -220,7 +217,7 @@ package com.terrynoya.common.control.scrollClasses
 			//calulate snapInterval
 			if(isNaN(this._snapInterval) || this._snapInterval <= 0)
 			{
-				this._value = rlt;
+				return rlt;
 			}
 			else if(this._snapInterval > 0 && this._snapInterval < 1)
 			{
@@ -234,7 +231,6 @@ package com.terrynoya.common.control.scrollClasses
 			else if(this._snapInterval >= 1)
 			{
 				rlt = Math.round((rlt - this._minimun) / _snapInterval) * _snapInterval + this._minimun;
-				this._value = rlt;
 			}
 			return rlt;
 		}

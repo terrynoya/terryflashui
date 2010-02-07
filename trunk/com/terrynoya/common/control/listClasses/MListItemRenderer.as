@@ -64,7 +64,7 @@ package com.terrynoya.common.control.listClasses
 		override public function set height(value:Number):void
 		{
 			this.drawBackground(this.width, value);
-			this.label.height=value;
+//			this.label.height=value;
 		}
 
 		override public function setCurrentState(stateName:String, playTransition:Boolean=true):void
@@ -74,8 +74,6 @@ package com.terrynoya.common.control.listClasses
 
 		private function drawBackground(w:Number, h:Number):void
 		{
-			
-			trace("this.width, this.height",this.width, this.height);
 			var g:Graphics=this.graphics;
 			g.clear();
 
