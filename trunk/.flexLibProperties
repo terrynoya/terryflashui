@@ -40,6 +40,17 @@
     <classEntry path="com.terrynoya.common.control.listClasses.MListItemRenderer"/>
     <classEntry path="com.terrynoya.common.util.MNumberUtil"/>
     <classEntry path="com.terrynoya.common.control.MComboBox"/>
+    <classEntry path="com.terrynoya.common.collection.IMList"/>
+    <classEntry path="com.terrynoya.common.collection.IMCollectionView"/>
+    <classEntry path="com.terrynoya.common.collection.MSort"/>
+    <classEntry path="com.terrynoya.common.collection.MSortField"/>
+    <classEntry path="com.terrynoya.common.util.MCompareUtil"/>
+    <classEntry path="com.terrynoya.common.util.MObjectUtil"/>
+    <classEntry path="com.terrynoya.common.util.MObjectType"/>
+    <classEntry path="com.terrynoya.common.collection.MArraySortOption"/>
+    <classEntry path="com.terrynoya.common.collection.MArrayList"/>
+    <classEntry path="com.terrynoya.common.collection.MListCollectionView"/>
+    <classEntry path="com.terrynoya.common.collection.MArrayCollection"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
