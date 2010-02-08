@@ -3,7 +3,6 @@ package com.terrynoya.common.control
 	import com.terrynoya.common.collection.MArrayCollection;
 	import com.terrynoya.common.control.listClasses.MItemRendererWraper;
 	import com.terrynoya.common.control.listClasses.MListItemRenderer;
-	import com.terrynoya.common.control.listClasses.MListItemRenderer2;
 	import com.terrynoya.common.core.MScrollControlBase;
 	import com.terrynoya.common.core.MSprite;
 	import com.terrynoya.common.events.MScrollEvent;
@@ -139,7 +138,7 @@ package com.terrynoya.common.control
 			for (var i:int=currCol; i < maxCol; i++)
 			{ 
 				var wraper:MItemRendererWraper=MObjectPoolManager.getObject(MItemRendererWraper);
-				wraper.itemRender = MObjectPoolManager.getObject(MListItemRenderer2);
+				wraper.itemRender = MObjectPoolManager.getObject(MListItemRenderer);
 				wraper.data=arr[i]; 
 				wraper.y=rowCount * this._rowHeight;
 				this._contentHolder.addChild(DisplayObject(wraper.itemRender));
@@ -191,7 +190,7 @@ package com.terrynoya.common.control
 			{
 				var wrapper:MItemRendererWraper = renderArr.pop();
 				MObjectPoolManager.recycleObject(MItemRendererWraper,wrapper);
-				MObjectPoolManager.recycleObject(MListItemRenderer2,this._contentHolder.removeChild(DisplayObject(wrapper.itemRender)));
+				MObjectPoolManager.recycleObject(MListItemRenderer,this._contentHolder.removeChild(DisplayObject(wrapper.itemRender)));
 			}
 		}
 	}

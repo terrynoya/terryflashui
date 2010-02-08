@@ -10,7 +10,6 @@ package com.terrynoya.common.control.listClasses
 	{
 		private var _itemRender:IMItemRenderer;
 		private var _rowno:int;
-		private var _hovered:Boolean;
 		
 		public function MItemRendererWraper(itemRender:IMItemRenderer = null)
 		{
@@ -44,6 +43,7 @@ package com.terrynoya.common.control.listClasses
 		public function set data(value:*):void
 		{
 			this._itemRender.data = value;
+			this.addListeners();
 		}
 		
 		public function get selected():Boolean
@@ -88,7 +88,7 @@ package com.terrynoya.common.control.listClasses
 		{
 			if (!anyButtonDown(event))
 			{
-				this._hovered=true;
+				this.itemRender.hovered=true;
 //				this.setCurrentState(null);
 			}
 		}
@@ -111,7 +111,7 @@ package com.terrynoya.common.control.listClasses
 		 */
 		protected function itemRenderer_rollOutHandler(event:MouseEvent):void
 		{
-			this._hovered=false;
+			this.itemRender.hovered=false;
 //			this.setCurrentState(null);
 		}
 

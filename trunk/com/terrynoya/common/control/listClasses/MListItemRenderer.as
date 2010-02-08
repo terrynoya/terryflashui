@@ -17,7 +17,7 @@ package com.terrynoya.common.control.listClasses
 		{
 			super();
 		}
-
+		
 		/**
 		 * 鼠标悬停时的颜色
 		 * @return
@@ -52,7 +52,7 @@ package com.terrynoya.common.control.listClasses
 			{
 				label=new MLabel();
 				addChild(label);
-			}
+			} 
 		}
 
 		override public function set width(value:Number):void
@@ -65,10 +65,9 @@ package com.terrynoya.common.control.listClasses
 		{
 			this.drawBackground(this.width, value);
 			
-//			this.label.height=value;
 		}
-
-		override public function setCurrentState(stateName:String, playTransition:Boolean=true):void
+		
+		override protected function updateView() : void
 		{
 			this.drawBackground(this.width, this.height);
 		}
@@ -88,7 +87,6 @@ package com.terrynoya.common.control.listClasses
 			{
 				color=this.hovered == true ? this._rollOverColor : 0xffffff;
 			}
-
 			g.beginFill(color);
 			g.drawRect(0, 0, w, h);
 			g.endFill();
