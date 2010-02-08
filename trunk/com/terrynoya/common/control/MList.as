@@ -114,7 +114,7 @@ package com.terrynoya.common.control
 		
 		private var renderArr:Array=[];
 
-		protected function updateView():void
+		override protected function updateView():void
 		{
 			if (null == this._dataProvider)
 			{
@@ -143,7 +143,6 @@ package com.terrynoya.common.control
 				wraper.data=arr[i]; 
 				wraper.y=rowCount * this._rowHeight;
 				this._contentHolder.addChild(DisplayObject(wraper.itemRender));
-
 				this.maxRendererWidth=Math.max(this.maxRendererWidth, wraper.width);
 				renderArr.push(wraper);
 				rowCount++;
@@ -194,10 +193,6 @@ package com.terrynoya.common.control
 				MObjectPoolManager.recycleObject(MItemRendererWraper,wrapper);
 				MObjectPoolManager.recycleObject(MListItemRenderer2,this._contentHolder.removeChild(DisplayObject(wrapper.itemRender)));
 			}
-//			for (var i:int=this.renderArr.numChildren - 1; i >= 0; i--)
-//			{
-//				MObjectPoolManager.recycleObject(MListItemRenderer,this._contentHolder.removeChildAt(i));
-//			}
 		}
 	}
 }

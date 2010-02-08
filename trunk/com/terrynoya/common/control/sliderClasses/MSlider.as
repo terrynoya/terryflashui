@@ -115,7 +115,7 @@ package com.terrynoya.common.control.sliderClasses
 			this.addListeners();
 		}
 			
-		private function updateView():void
+		override protected function updateView():void
 		{
 			if(this._isDragging)
 			{

@@ -1,6 +1,7 @@
 package com.terrynoya.common.control.listClasses
 {
 	import com.terrynoya.common.core.IMItemRenderer;
+	import com.terrynoya.common.core.melon_internal;
 	
 	import flash.display.DisplayObject;
 	import flash.events.MouseEvent;
@@ -14,6 +15,20 @@ package com.terrynoya.common.control.listClasses
 		public function MItemRendererWraper(itemRender:IMItemRenderer = null)
 		{
 			this._itemRender=itemRender;
+		}
+		
+		/**
+		 * 该单元格渲染器在所有数据中为哪一行数据
+		 * @private
+		 */
+		melon_internal function get rowNO():int
+		{
+			return this._rowno;
+		}
+		
+		melon_internal function set rowNO(value:int):void
+		{
+			this._rowno=value;
 		}
 		
 		public function get width():Number

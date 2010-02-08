@@ -29,7 +29,6 @@ package com.terrynoya.common.control
     		{ 
     			return false;
     		}
-    		
     		var s:String = super.text = this._text;
     		while(s.length > 1 && this.textWidth > this.explicitWidth)
     		{

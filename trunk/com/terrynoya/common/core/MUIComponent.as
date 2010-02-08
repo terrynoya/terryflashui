@@ -6,13 +6,45 @@ package com.terrynoya.common.core
 	public class MUIComponent extends MSprite
 	{
 		private var _color:uint;
-
+		
+		private var _minWidth:Number;
+		
+		private var _minHeight:Number;
+		
 		public function MUIComponent()
 		{
 			super();
 			this.createChildren();
 		}
-
+		
+		public function get minWidth():Number
+		{
+			return this._minWidth;
+		}
+		
+		public function set minWidth(value:Number):void
+		{
+			this._minWidth = value;
+			this.updateView();
+		}
+		
+		public function set minHeight(value:Number):void
+		{
+			this._minHeight = value;
+			this.updateView();
+		}
+		
+		public function get minHeight():Number
+		{
+			return this._minHeight;
+		}
+		
+		
+		protected function updateView():void
+		{
+			
+		}
+		
 		protected function createChildren():void
 		{
 			

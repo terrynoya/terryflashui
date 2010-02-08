@@ -48,8 +48,12 @@ package com.terrynoya.common.control
 
 		override public function set width(value:Number):void
 		{
+			if(this.width == value)
+			{
+				return;
+			}
 			this._textField.explicitWidth=value;
-			this._textField.truncateToFit();
+//			this._textField.truncateToFit();
 			super.width=value;
 		}
 		

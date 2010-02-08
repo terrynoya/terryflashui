@@ -64,6 +64,7 @@ package com.terrynoya.common.control.listClasses
 		override public function set height(value:Number):void
 		{
 			this.drawBackground(this.width, value);
+			
 //			this.label.height=value;
 		}
 

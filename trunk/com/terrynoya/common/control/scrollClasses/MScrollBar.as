@@ -8,12 +8,12 @@ package com.terrynoya.common.control.scrollClasses
 	import com.terrynoya.common.skins.halo.scrollSkin.MScrollTrackSkin;
 	import com.terrynoya.common.skins.halo.scrollSkin.MScrollUpArrowSkin;
 	import com.terrynoya.common.util.MNumberUtil;
-	
+
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
-	
-	[Event(name="scroll",type="com.terrynoya.common.events.MScrollEvent")]
-	
+
+	[Event(name="scroll", type="com.terrynoya.common.events.MScrollEvent")]
+
 	public class MScrollBar extends MUIComponent
 	{
 		protected var upArrow:MButton;
@@ -24,72 +24,72 @@ package com.terrynoya.common.control.scrollClasses
 
 		protected var thumb:MButton;
 
-		private var _minimun:Number = 0;
+		private var _minimun:Number=0;
 
-		private var _maximun:Number = 10;
-		
+		private var _maximun:Number=10;
+
 		private var _direction:String;
-		
+
 		private var _mousedownPoint:Point;
-		
+
 		private var _lstBarPoint:Point;
 
 		private var _offsetPoint:Point;
 
 		private var _pageSize:Number=5;
-		
-		private var _value:Number = 0;
-		
+
+		private var _value:Number=0;
+
 		private var _snapInterval:Number;
-		
+
 		public function MScrollBar()
 		{
-			super(); 
+			super();
 			this.addListeners();
 			this._lstBarPoint=new Point(0, 0);
 		}
-		
+
 		public function get scrollPosition():Number
 		{
 			return this._value;
 		}
-		
+
 		public function get direction():String
 		{
 			return this._direction;
 		}
-		
+
 		public function get snapInerval():Number
 		{
 			return this._snapInterval;
 		}
-		
+
 		public function set snapInerval(value:Number):void
 		{
-			this._snapInterval = value;
+			this._snapInterval=value;
 		}
-		
+
 		public function set direction(value:String):void
 		{
-			this._direction = value; 
+			this._direction=value;
 		}
-		
+
 		public function set pageSize(value:Number):void
 		{
-			if(value == 0 || value == this.pageSize)
+			if (value == 0 || value == this.pageSize)
 			{
 				return;
 			}
-			this._pageSize = value;
-			
+			this._pageSize=value;
+
 			this.updateView();
 		}
-		
+
 		public function get pageSize():Number
 		{
 			return this._pageSize;
 		}
-		
+
 		override protected function createChildren():void
 		{
 			this.upArrow=new MButton();
@@ -103,13 +103,13 @@ package com.terrynoya.common.control.scrollClasses
 
 			this.thumb=new MButton();
 			this.thumb.buttonSkin=new MScrollThumbSkin();
-
+			this.thumb.minHeight=20;
 			this.addChild(this.upArrow);
 			this.addChild(this.downArrow);
 			this.addChild(this.track);
 			this.addChild(this.thumb);
 
-			
+
 		}
 
 		public function set maximum(value:Number):void
@@ -119,7 +119,7 @@ package com.terrynoya.common.control.scrollClasses
 				return;
 			}
 			this._maximun=value;
-			
+
 			this.updateView();
 		}
 
@@ -135,7 +135,7 @@ package com.terrynoya.common.control.scrollClasses
 				return;
 			}
 			this._minimun=value;
-			
+
 			this.updateView();
 		}
 
@@ -147,18 +147,24 @@ package com.terrynoya.common.control.scrollClasses
 
 		override public function set width(value:Number):void
 		{
-			
+
 		}
-		
-		private function updateView():void
+
+		override protected function updateView():void
 		{
-			if(this.maximum <= 0)
+			if (this.maximum <= 0)
 			{
-				this.thumb.visible = false;
+				this.thumb.visible=false;
 				return;
 			}
 			var totalpage:Number=Math.round((this._maximun - this.minimun) / this._pageSize);
-			this.thumb.height=this.track.height / (totalpage + 1);
+
+			var th:Number=this.track.height / (totalpage + 1);
+			if (th < this.thumb.minHeight)
+			{
+				th=this.thumb.minHeight;
+			}
+			this.thumb.height=th;
 		}
 
 		override public function set height(value:Number):void
@@ -211,41 +217,41 @@ package com.terrynoya.common.control.scrollClasses
 			}
 
 			this.thumb.y=ty;
-			var val:Number = this.getValueByPos();
-			
-			if(val != this._value)
+			var val:Number=this.getValueByPos();
+
+			if (val != this._value)
 			{
-				this._value = val;
-				var evt:MScrollEvent = new MScrollEvent(MScrollEvent.SCROLL,val,this.direction);
+				this._value=val;
+				var evt:MScrollEvent=new MScrollEvent(MScrollEvent.SCROLL, val, this.direction);
 				this.dispatchEvent(evt);
 			}
 		}
-		
-		
+
+
 		private function getValueByPos():Number
 		{
-			var offsetX:Number = thumb.y - this.track.y;
-			var val:Number = offsetX / (this.track.height - this.thumb.height) * (this.maximum - this.minimun);
-			var rlt:Number = val + this.minimun;
-			
-			
+			var offsetX:Number=thumb.y - this.track.y;
+			var val:Number=offsetX / (this.track.height - this.thumb.height) * (this.maximum - this.minimun);
+			var rlt:Number=val + this.minimun;
+
+
 			//calulate snapInterval
-			if(isNaN(this._snapInterval) || this._snapInterval <= 0)
+			if (isNaN(this._snapInterval) || this._snapInterval <= 0)
 			{
 				return rlt;
 			}
-			else if(this._snapInterval > 0 && this._snapInterval < 1)
+			else if (this._snapInterval > 0 && this._snapInterval < 1)
 			{
-				var pow:Number = Math.pow(10, MNumberUtil.getPrecision(this._snapInterval));
-				var snap:Number = _snapInterval * pow;
-				var rounded:Number = Math.round(rlt * pow);
-				var snapped:Number = Math.round(rounded / snap) * snap;
-				var v:Number = snapped / pow;
-				rlt = Math.max(this._minimun, Math.min(this._maximun, v));
-			} 
-			else if(this._snapInterval >= 1)
+				var pow:Number=Math.pow(10, MNumberUtil.getPrecision(this._snapInterval));
+				var snap:Number=_snapInterval * pow;
+				var rounded:Number=Math.round(rlt * pow);
+				var snapped:Number=Math.round(rounded / snap) * snap;
+				var v:Number=snapped / pow;
+				rlt=Math.max(this._minimun, Math.min(this._maximun, v));
+			}
+			else if (this._snapInterval >= 1)
 			{
-				rlt = Math.round((rlt - this._minimun) / _snapInterval) * _snapInterval + this._minimun;
+				rlt=Math.round((rlt - this._minimun) / _snapInterval) * _snapInterval + this._minimun;
 			}
 			return rlt;
 		}
