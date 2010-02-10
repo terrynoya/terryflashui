@@ -8,7 +8,7 @@ package com.terrynoya.common.control.scrollClasses
 	import com.terrynoya.common.skins.halo.scrollSkin.MScrollTrackSkin;
 	import com.terrynoya.common.skins.halo.scrollSkin.MScrollUpArrowSkin;
 	import com.terrynoya.common.util.MNumberUtil;
-
+	
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 
@@ -52,6 +52,26 @@ package com.terrynoya.common.control.scrollClasses
 		public function get scrollPosition():Number
 		{
 			return this._value;
+		}
+		
+		public function set scrollPosition(value:Number):void
+		{
+			if(this.maximum < value)
+			{
+				value = this.maximum;
+			}
+			else if(this.minimun > value)
+			{
+				value = this.minimun;;	
+			}
+			if(this._value == value)
+			{
+				return;
+			}
+			this._value = value;
+			
+			this.thumb.y = getXByValue(this._value);
+			
 		}
 
 		public function get direction():String
@@ -233,8 +253,7 @@ package com.terrynoya.common.control.scrollClasses
 			var offsetX:Number=thumb.y - this.track.y;
 			var val:Number=offsetX / (this.track.height - this.thumb.height) * (this.maximum - this.minimun);
 			var rlt:Number=val + this.minimun;
-
-
+			
 			//calulate snapInterval
 			if (isNaN(this._snapInterval) || this._snapInterval <= 0)
 			{
@@ -255,7 +274,18 @@ package com.terrynoya.common.control.scrollClasses
 			}
 			return rlt;
 		}
-
+		
+		/**
+		 * value -> x
+		 * @private
+		 */
+		private function getXByValue(value:Number):Number
+		{
+			var offsetY:Number = value * (this.track.height - this.thumb.height) / (this.maximum - this.minimun);
+			var y:Number = offsetY + this.track.y;
+			return y;
+		}
+ 
 		private function onThumbUp(e:MouseEvent):void
 		{
 			this.removeThumbDragListener();

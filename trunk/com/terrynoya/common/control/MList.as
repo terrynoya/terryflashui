@@ -83,6 +83,7 @@ package com.terrynoya.common.control
 			this._contentHolder=new MSprite();
 			this._contentHolder.mask=this.maskShape;
 			this.addChild(this._contentHolder);
+			
 		}
 		
 		override public function set width(value:Number) : void
@@ -146,14 +147,10 @@ package com.terrynoya.common.control
 				renderArr.push(wraper);
 				rowCount++;
 			}
+			
 			this.ajustRendererWidth(renderArr);
 		}
 		
-		override protected function scrollHandler(e:MScrollEvent) : void
-		{
-			this.updateView();
-		}
-
 		/**
 		 *	调整所有单元格渲染器的宽度
 		 *	@private

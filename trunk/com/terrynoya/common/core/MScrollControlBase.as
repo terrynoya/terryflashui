@@ -7,6 +7,7 @@ package com.terrynoya.common.core
 	
 	import flash.display.Graphics;
 	import flash.display.Shape;
+	import flash.events.MouseEvent;
 	
 	public class MScrollControlBase extends MUIComponent
 	{
@@ -95,11 +96,27 @@ package com.terrynoya.common.core
 		{
 			this.vScrollBar.addEventListener(MScrollEvent.SCROLL,scrollHandler);
 			this.hScrollBar.addEventListener(MScrollEvent.SCROLL,scrollHandler);
+			this.addEventListener(MouseEvent.MOUSE_WHEEL,onMouseWheel);
+		}
+		
+		
+		private function removeListeners():void
+		{
+			this.vScrollBar.removeEventListener(MScrollEvent.SCROLL,scrollHandler);
+			this.hScrollBar.removeEventListener(MScrollEvent.SCROLL,scrollHandler);
+			this.removeEventListener(MouseEvent.MOUSE_WHEEL,onMouseWheel);
+		}
+		
+		protected function onMouseWheel(e:MouseEvent):void
+		{
+			var direction:int = e.delta > 0 ? -1 : 1;
+			this.vScrollBar.scrollPosition = this.vScrollBar.snapInerval * direction;
+			this.updateView();
 		}
 		
 		protected function scrollHandler(e:MScrollEvent):void
 		{
-			
+			this.updateView();
 		}
 		
 		protected function layoutBar(w:Number,h:Number):void

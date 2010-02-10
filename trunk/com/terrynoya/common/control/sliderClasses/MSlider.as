@@ -81,6 +81,11 @@ package com.terrynoya.common.control.sliderClasses
 			this.updateView();
 		}
 		
+		public function get value():Number
+		{
+			return this._value;
+		}
+		
 		public function set value(value:Number):void
 		{
 			if(this.maximum < value)
@@ -96,7 +101,6 @@ package com.terrynoya.common.control.sliderClasses
 				return;
 			}
 			this._value = value;
-			
 			this.updateView();
 			this.dispatchChangeEvent();
 		}
