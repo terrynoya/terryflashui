@@ -42,7 +42,7 @@ package com.terrynoya.common.control.scrollClasses
 		private var _value:Number=0;
 
 		private var _snapInterval:Number;
-
+		
 		public function MScrollBar()
 		{
 			super();
@@ -136,12 +136,17 @@ package com.terrynoya.common.control.scrollClasses
 
 		public function set maximum(value:Number):void
 		{
-			if (this._minimun > value)
+			if (this._minimun == value)
 			{
 				return;
 			}
 			this._maximun=value;
-
+			
+			if(this.scrollPosition > value)
+			{
+				this.scrollPosition = value;	
+			}
+			
 			this.updateView();
 		}
 
@@ -152,12 +157,17 @@ package com.terrynoya.common.control.scrollClasses
 
 		public function set minimun(value:Number):void
 		{
-			if (this._maximun < value)
+			if (this._maximun == value)
 			{
 				return;
 			}
 			this._minimun=value;
-
+			
+			if(this.scrollPosition < value)
+			{
+				this.scrollPosition = value;	
+			}
+			
 			this.updateView();
 		}
 
@@ -302,9 +312,7 @@ package com.terrynoya.common.control.scrollClasses
 			var thumbPoint:Point = this.track.globalToLocal(new Point(this.thumb.x,this.thumb.y));
 			var mousePoint:Point = new Point(e.localX,e.localY);
 			var flipPageDown:int = mousePoint.subtract(thumbPoint).y < 0 ? -1:1;
-			
-			this.scrollPosition += flipPageDown * (this.maximum - this.minimun) * this.pageSize;
-			trace(this.scrollPosition);
+			this.scrollPosition += flipPageDown * this.pageSize;
 		}
 
 		private function layoutUI():void
