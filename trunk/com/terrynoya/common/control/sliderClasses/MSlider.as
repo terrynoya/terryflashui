@@ -248,8 +248,7 @@ package com.terrynoya.common.control.sliderClasses
 		
 		private function onTrackDown(e:MouseEvent):void
 		{
-			trace(e.localX,e.localY);
+			
 		}
-		
 	}
 }

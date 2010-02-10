@@ -72,6 +72,7 @@ package com.terrynoya.common.control.scrollClasses
 			this._value = value;
 			
 			this.thumb.y = getXByValue(this._value);
+			this._lstBarPoint=new Point(this.thumb.x, this.thumb.y);
 			
 		}
 
@@ -121,7 +122,7 @@ package com.terrynoya.common.control.scrollClasses
 
 			this.track=new MSkinableComponent();
 			this.track.skin = new MScrollTrackSkin();
-
+			
 			this.thumb=new MButton();
 			this.thumb.buttonSkin=new MScrollThumbSkin();
 			this.thumb.minHeight=20;
@@ -178,9 +179,10 @@ package com.terrynoya.common.control.scrollClasses
 				this.thumb.visible=false;
 				return;
 			}
-			var totalpage:Number=Math.round((this._maximun - this.minimun) / this._pageSize);
-
-			var th:Number=this.track.height / (totalpage + 1);
+			var totalpage:Number=Math.ceil((this._maximun - this.minimun) / this._pageSize);
+			
+			var th:Number=this.track.height / totalpage;
+			
 			if (th < this.thumb.minHeight)
 			{
 				th=this.thumb.minHeight;
@@ -198,6 +200,7 @@ package com.terrynoya.common.control.scrollClasses
 		private function addListeners():void
 		{
 			this.thumb.addEventListener(MouseEvent.MOUSE_DOWN, onThumbPressHandler);
+			this.track.addEventListener(MouseEvent.MOUSE_DOWN,onTrackMouseDown);
 		}
 
 		private function onThumbPressHandler(e:MouseEvent):void
@@ -238,6 +241,7 @@ package com.terrynoya.common.control.scrollClasses
 			}
 
 			this.thumb.y=ty;
+			
 			var val:Number=this.getValueByPos();
 
 			if (val != this._value)
@@ -282,7 +286,7 @@ package com.terrynoya.common.control.scrollClasses
 		 */
 		private function getXByValue(value:Number):Number
 		{
-			var offsetY:Number = value * (this.track.height - this.thumb.height) / (this.maximum - this.minimun);
+			var offsetY:Number = (value - this.minimun) * (this.track.height - this.thumb.height) / (this.maximum - this.minimun);
 			var y:Number = offsetY + this.track.y;
 			return y;
 		}
@@ -291,6 +295,16 @@ package com.terrynoya.common.control.scrollClasses
 		{
 			this.removeThumbDragListener();
 			this._lstBarPoint=new Point(this.thumb.x, this.thumb.y);
+		}
+		
+		private function onTrackMouseDown(e:MouseEvent):void
+		{
+			var thumbPoint:Point = this.track.globalToLocal(new Point(this.thumb.x,this.thumb.y));
+			var mousePoint:Point = new Point(e.localX,e.localY);
+			var flipPageDown:int = mousePoint.subtract(thumbPoint).y < 0 ? -1:1;
+			
+			this.scrollPosition += flipPageDown * (this.maximum - this.minimun) * this.pageSize;
+			trace(this.scrollPosition);
 		}
 
 		private function layoutUI():void
