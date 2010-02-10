@@ -1,12 +1,12 @@
 package com.terrynoya.common.control.sliderClasses
 {
 	import com.terrynoya.common.control.MButton;
+	import com.terrynoya.common.core.MSkinableComponent;
 	import com.terrynoya.common.core.MUIComponent;
 	import com.terrynoya.common.events.MSliderEvent;
 	import com.terrynoya.common.manager.MSkinManager;
 	import com.terrynoya.common.util.MNumberUtil;
 	
-	import flash.display.DisplayObject;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	
@@ -16,8 +16,8 @@ package com.terrynoya.common.control.sliderClasses
 	{
 		private var _thumb:MButton;
 		
-		private var _track:DisplayObject;
-
+		private var _track:MSkinableComponent;
+		
 		private var _mouseDownPoint:Point;
 		private var _offsetPoint:Point;
 		private var _lstBarPoint:Point;
@@ -107,7 +107,8 @@ package com.terrynoya.common.control.sliderClasses
 		
 		override protected function createChildren():void
 		{
-			this._track = MSkinManager.sliderTrackSkin;
+			this._track = new MSkinableComponent();
+			this._track.skin = MSkinManager.sliderTrackSkin;
 			this.addChild(this._track);
 
 			this._thumb = new MButton();
@@ -132,7 +133,7 @@ package com.terrynoya.common.control.sliderClasses
 		private function addListeners():void
 		{
 			this._thumb.addEventListener(MouseEvent.MOUSE_DOWN, onThumbPressHandler);
-
+			this._track.addEventListener(MouseEvent.MOUSE_DOWN,onTrackDown);
 		}
 
 		private function onThumbPressHandler(e:MouseEvent):void
@@ -244,5 +245,11 @@ package com.terrynoya.common.control.sliderClasses
 			var evt:MSliderEvent = new MSliderEvent(MSliderEvent.CHANGE,this._value);
 			this.dispatchEvent(evt);
 		}
+		
+		private function onTrackDown(e:MouseEvent):void
+		{
+			trace(e.localX,e.localY);
+		}
+		
 	}
 }

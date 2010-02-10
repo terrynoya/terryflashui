@@ -1,6 +1,7 @@
 package com.terrynoya.common.control.scrollClasses
 {
 	import com.terrynoya.common.control.MButton;
+	import com.terrynoya.common.core.MSkinableComponent;
 	import com.terrynoya.common.core.MUIComponent;
 	import com.terrynoya.common.events.MScrollEvent;
 	import com.terrynoya.common.skins.halo.scrollSkin.MScrollDownArrowSkin;
@@ -20,7 +21,7 @@ package com.terrynoya.common.control.scrollClasses
 
 		protected var downArrow:MButton;
 
-		protected var track:MButton;
+		protected var track:MSkinableComponent;
 
 		protected var thumb:MButton;
 
@@ -118,8 +119,8 @@ package com.terrynoya.common.control.scrollClasses
 			this.downArrow=new MButton();
 			this.downArrow.buttonSkin=new MScrollDownArrowSkin();
 
-			this.track=new MButton();
-			this.track.buttonSkin=new MScrollTrackSkin();
+			this.track=new MSkinableComponent();
+			this.track.skin = new MScrollTrackSkin();
 
 			this.thumb=new MButton();
 			this.thumb.buttonSkin=new MScrollThumbSkin();
@@ -166,8 +167,8 @@ package com.terrynoya.common.control.scrollClasses
 		}
 
 		override public function set width(value:Number):void
-		{
-
+		{	
+			
 		}
 
 		override protected function updateView():void

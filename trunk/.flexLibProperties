@@ -55,6 +55,7 @@
     <classEntry path="com.terrynoya.common.control.listClasses.MItemRendererWraper"/>
     <classEntry path="com.terrynoya.common.util.MObjectPoolManager"/>
     <classEntry path="com.terrynoya.common.core.IMDisplayObject"/>
+    <classEntry path="com.terrynoya.common.core.MSkinableComponent"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
