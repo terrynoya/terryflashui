@@ -22,7 +22,7 @@ package com.terrynoya.common.core
 			super();
 			this.createChildren();
 		}
-		
+		 
 		/**
 		 * 
 		 * @return 
