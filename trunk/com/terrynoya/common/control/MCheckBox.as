@@ -13,7 +13,6 @@ package com.terrynoya.common.control
 		public function MCheckBox()
 		{
 			super();
-			this.buttonSkin = MSkinManager.checkBoxSkin;
 			this.addEventListener(MouseEvent.CLICK, onClick);
 		}
 		
@@ -27,10 +26,15 @@ package com.terrynoya.common.control
 			this._ischecked = value;
 		}
 		
+		override protected function createSkin() : void
+		{
+			this.skin = MSkinManager.checkBoxSkin;
+		}
+		
 		private function toggle():void
 		{
 			this.checked = !this.checked;
-			this.updateSkin();
+			this.updateView();
 		}
 		
 		private function onClick(e:MouseEvent):void
@@ -42,7 +46,7 @@ package com.terrynoya.common.control
 		{
 			if(this.checked)
 			{
-				return MCheckBoxSkin(this.buttonSkin).selectedSkin;
+				return MCheckBoxSkin(this.skin).selectedSkin;
 			}
 			return super.getSkinByPhase(phase);
 		}

@@ -8,7 +8,7 @@ package com.terrynoya.common.control.scrollClasses
 		public function MScrollThumb()
 		{
 			super();
-			this.buttonSkin=new MScrollThumbSkin();
+			this.skin=new MScrollThumbSkin();
 		}
 	}
 }

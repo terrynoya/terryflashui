@@ -1,12 +1,13 @@
 package com.terrynoya.common.skins.halo.slider
 {
-	import com.terrynoya.common.skins.halo.MSkin;
+	import com.terrynoya.common.skins.halo.MButtonSkin;
 	
+	import flash.display.DisplayObject;
 	import flash.display.GradientType;
 	
 	import mx.utils.ColorUtil;
 
-	public class MSliderTrackSkin extends MSkin
+	public class MSliderTrackSkin extends MButtonSkin
 	{
 		public function MSliderTrackSkin()
 		{
@@ -35,6 +36,26 @@ package com.terrynoya.common.skins.halo.slider
 				2, 1, w - 2, 1, 0,
 				fillColors, Math.max(fillAlphas[1] - 0.3, 0),
 				horizontalGradientMatrix(2, 1, w - 2, 1));
+		}
+		 
+		override public function get upSkin():DisplayObject
+		{
+			return this;
+		}
+		
+		override public function get overSkin():DisplayObject
+		{
+			return this;
+		}
+		
+		override public function get downSkin():DisplayObject
+		{
+			return this;
+		}
+		
+		override public function get disabledSkin():DisplayObject
+		{
+			return this;
 		}
 
 	}

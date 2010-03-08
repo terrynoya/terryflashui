@@ -7,7 +7,7 @@ package com.terrynoya.common.skins.halo
 	import mx.utils.ColorUtil;
 	import mx.utils.GraphicsUtil;
 
-	public class MSkin extends Shape
+	public class MSkin extends Shape implements IMSkin
 	{
 		private static var tempMatrix:Matrix=new Matrix();
 		protected var w:Number;

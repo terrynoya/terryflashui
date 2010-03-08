@@ -4,8 +4,7 @@ package com.terrynoya.common.manager
 	import com.terrynoya.common.skins.halo.MButtonSkin;
 	import com.terrynoya.common.skins.halo.MCheckBoxSkin;
 	import com.terrynoya.common.skins.halo.MRadioButtonSkin;
-	import com.terrynoya.common.skins.halo.slider.MSliderThumbSkin;
-	import com.terrynoya.common.skins.halo.slider.MSliderTrackSkin;
+	import com.terrynoya.common.skins.halo.MSliderSkin;
 	
 	import flash.events.EventDispatcher;
 
@@ -45,16 +44,23 @@ package com.terrynoya.common.manager
 			return skin;
 		}
 		
-		public static function get sliderThumbSkin():MSliderThumbSkin
+		public static function get sliderSkin():MSliderSkin
 		{
-			var skin:MSliderThumbSkin = new MSliderThumbSkin();
-			return skin;
+			var skin:MSliderSkin = new MSliderSkin();
+			return skin; 
 		}
 		
-		public static function get sliderTrackSkin():MSliderTrackSkin
-		{
-			var skin:MSliderTrackSkin = new MSliderTrackSkin();
-			return skin;
-		}
+		
+//		public static function get sliderThumbSkin():MSliderThumbSkin
+//		{
+//			var skin:MSliderThumbSkin = new MSliderThumbSkin();
+//			return skin;
+//		}
+//		
+//		public static function get sliderTrackSkin():MSliderTrackSkin
+//		{
+//			var skin:MSliderTrackSkin = new MSliderTrackSkin();
+//			return skin;
+//		}
 	}
 }

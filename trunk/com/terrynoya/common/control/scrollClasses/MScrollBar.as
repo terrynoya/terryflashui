@@ -2,7 +2,6 @@ package com.terrynoya.common.control.scrollClasses
 {
 	import com.terrynoya.common.control.MButton;
 	import com.terrynoya.common.core.MSkinableComponent;
-	import com.terrynoya.common.core.MUIComponent;
 	import com.terrynoya.common.events.MScrollEvent;
 	import com.terrynoya.common.skins.halo.scrollSkin.MScrollDownArrowSkin;
 	import com.terrynoya.common.skins.halo.scrollSkin.MScrollThumbSkin;
@@ -15,7 +14,7 @@ package com.terrynoya.common.control.scrollClasses
 
 	[Event(name="scroll", type="com.terrynoya.common.events.MScrollEvent")]
 
-	public class MScrollBar extends MUIComponent
+	public class MScrollBar extends MSkinableComponent
 	{
 		protected var upArrow:MButton;
 
@@ -49,7 +48,7 @@ package com.terrynoya.common.control.scrollClasses
 			this.addListeners();
 			this._lstBarPoint=new Point(0, 0);
 		}
-
+		
 		public function get scrollPosition():Number
 		{
 			return this._value;
@@ -73,7 +72,6 @@ package com.terrynoya.common.control.scrollClasses
 			
 			this.thumb.y = getXByValue(this._value);
 			this._lstBarPoint=new Point(this.thumb.x, this.thumb.y);
-			
 		}
 
 		public function get direction():String
@@ -115,23 +113,22 @@ package com.terrynoya.common.control.scrollClasses
 		override protected function createChildren():void
 		{
 			this.upArrow=new MButton();
-			this.upArrow.buttonSkin=new MScrollUpArrowSkin();
+			this.upArrow.skin=new MScrollUpArrowSkin();
 
 			this.downArrow=new MButton();
-			this.downArrow.buttonSkin=new MScrollDownArrowSkin();
+			this.downArrow.skin=new MScrollDownArrowSkin();
 
-			this.track=new MSkinableComponent();
+			this.track=new MButton();
 			this.track.skin = new MScrollTrackSkin();
 			
 			this.thumb=new MButton();
-			this.thumb.buttonSkin=new MScrollThumbSkin();
+			this.thumb.skin=new MScrollThumbSkin();
 			this.thumb.minHeight=20;
 			this.addChild(this.upArrow);
 			this.addChild(this.downArrow);
 			this.addChild(this.track);
 			this.addChild(this.thumb);
-
-
+			
 		}
 
 		public function set maximum(value:Number):void
@@ -154,7 +151,7 @@ package com.terrynoya.common.control.scrollClasses
 		{
 			return this._maximun;
 		}
-
+		
 		public function set minimun(value:Number):void
 		{
 			if (this._maximun == value)
@@ -170,8 +167,7 @@ package com.terrynoya.common.control.scrollClasses
 			
 			this.updateView();
 		}
-
-
+		
 		public function get minimun():Number
 		{
 			return this._minimun;
@@ -181,9 +177,11 @@ package com.terrynoya.common.control.scrollClasses
 		{	
 			
 		}
-
+		
 		override protected function updateView():void
 		{
+			super.updateView();
+			
 			if (this.maximum <= 0)
 			{
 				this.thumb.visible=false;
@@ -225,7 +223,7 @@ package com.terrynoya.common.control.scrollClasses
 			this.stage.addEventListener(MouseEvent.MOUSE_MOVE, onThumbMove);
 			this.stage.addEventListener(MouseEvent.MOUSE_UP, onThumbUp);
 		}
-
+		
 		private function removeThumbDragListener():void
 		{
 			this.stage.removeEventListener(MouseEvent.MOUSE_MOVE, onThumbMove);
@@ -261,8 +259,7 @@ package com.terrynoya.common.control.scrollClasses
 				this.dispatchEvent(evt);
 			}
 		}
-
-
+					
 		private function getValueByPos():Number
 		{
 			var offsetX:Number=thumb.y - this.track.y;

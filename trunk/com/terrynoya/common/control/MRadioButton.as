@@ -7,7 +7,11 @@ package com.terrynoya.common.control
 		public function MRadioButton()
 		{
 			super();
-			this.buttonSkin = MSkinManager.radioButtonSkin;
+		}
+		
+		override protected function createSkin() : void
+		{
+			this.skin = MSkinManager.radioButtonSkin;
 		}
 	}
 }

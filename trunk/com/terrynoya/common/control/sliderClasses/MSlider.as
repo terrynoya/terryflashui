@@ -2,9 +2,9 @@ package com.terrynoya.common.control.sliderClasses
 {
 	import com.terrynoya.common.control.MButton;
 	import com.terrynoya.common.core.MSkinableComponent;
-	import com.terrynoya.common.core.MUIComponent;
 	import com.terrynoya.common.events.MSliderEvent;
 	import com.terrynoya.common.manager.MSkinManager;
+	import com.terrynoya.common.skins.halo.IMSliderSkin;
 	import com.terrynoya.common.util.MNumberUtil;
 	
 	import flash.events.MouseEvent;
@@ -12,7 +12,7 @@ package com.terrynoya.common.control.sliderClasses
 	
 	[Event(name="change",type="com.terrynoya.common.events.MSliderEvent")]
 	
-	public class MSlider extends MUIComponent
+	public class MSlider extends MSkinableComponent
 	{
 		private var _thumb:MButton;
 		
@@ -107,17 +107,21 @@ package com.terrynoya.common.control.sliderClasses
 		
 		override protected function createChildren():void
 		{
-			this._track = new MSkinableComponent();
-			this._track.skin = MSkinManager.sliderTrackSkin;
+			super.createChildren();
+			this._track = new MButton();
 			this.addChild(this._track);
 
 			this._thumb = new MButton();
-			this._thumb.buttonSkin = MSkinManager.sliderThumbSkin;
 			this.addChild(this._thumb);
-
 			this._lstBarPoint = new Point(0,0);
-
 			this.addListeners();
+		}
+		
+		override protected function createSkin() : void
+		{
+			this.skin = MSkinManager.sliderSkin;
+			this._track.skin = this.sliderSkin.trackSkin;
+			this._thumb.skin = this.sliderSkin.thumbSkin;
 		}
 			
 		override protected function updateView():void
@@ -249,6 +253,11 @@ package com.terrynoya.common.control.sliderClasses
 		private function onTrackDown(e:MouseEvent):void
 		{
 			
+		}
+		
+		private function get sliderSkin():IMSliderSkin
+		{
+			return IMSliderSkin(this.skin);
 		}
 	}
 }
