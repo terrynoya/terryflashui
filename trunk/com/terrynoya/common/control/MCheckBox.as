@@ -2,7 +2,7 @@ package com.terrynoya.common.control
 {
     import com.terrynoya.common.manager.MSkinManager;
     import com.terrynoya.common.skins.halo.MCheckBoxSkin;
-
+    
     import flash.display.DisplayObject;
     import flash.events.MouseEvent;
 
@@ -25,6 +25,15 @@ package com.terrynoya.common.control
         {
             super();
             this.addEventListener(MouseEvent.CLICK, onClick);
+        }
+        
+        /**
+         * 设置Label的宽度
+         */
+        public function set labelWidth(value:Number):void
+        {
+        	this._label.width = value;
+        	this.updateView();
         }
 
 

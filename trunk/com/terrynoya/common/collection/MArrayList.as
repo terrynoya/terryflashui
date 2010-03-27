@@ -1,5 +1,8 @@
 package com.terrynoya.common.collection
 {
+	import com.terrynoya.common.util.MObjectType;
+	import com.terrynoya.common.util.MObjectUtil;
+	
 
 	public class MArrayList implements IMList
 	{
@@ -17,14 +20,22 @@ package com.terrynoya.common.collection
 		public function get length():int
 		{
 			return data.length;
-		}
-
+		} 
+ 
 		public function addItem(item:Object):void
 		{
-			var newArr:Array=this.getDataFromObject(item);
-			var startIndex:int=this.data.length;
-			var endIndex:int=this.data.length + newArr.length - 1;
-			this.data=this.data.concat(newArr);
+//			this.data.push(item);
+			if(this.isBasicType(item)
+			{
+				this.data.push(item);
+			}	
+			else
+			{
+				this.getDataFromObject(item);
+			}
+//			var startIndex:int=this.data.length;
+//			var endIndex:int=this.data.length + newArr.length - 1;
+//			this.data=this.data.concat(newArr);
 //			this.dispatchDataChangeEvent(UzDataProviderChangeType.ADD, startIndex, endIndex);
 		}
 
@@ -90,9 +101,11 @@ package com.terrynoya.common.collection
 		 * @param obj
 		 * @return
 		 */
+		private	var rltArr:Array=[];
+		
 		protected function getDataFromObject(obj:*):Array
 		{
-			var rltArr:Array=[];
+			rltArr = [];
 			if (obj is Array)
 			{
 				rltArr=obj;
@@ -105,15 +118,14 @@ package com.terrynoya.common.collection
 			{
 				rltArr=MArrayList(obj).toArray();
 			}
-			else if (obj is String)
-			{
-				rltArr.push(obj);
-			}
-			else
-			{
-				rltArr.push(obj);
-			}
+			
 			return rltArr;
+		}
+		
+		private function isBasicType(obj:*):Boolean
+		{
+			var rlt:Boolean = obj is Number || obj is String 
+			return  rlt;
 		}
 
 		/**

@@ -7,5 +7,6 @@ package com.terrynoya.common.util
 		public static const NUMBER:String = "number";
 		public static const OBJECT:String = "object";
 		public static const XML:String = "xml";
+		
 	}
 }
