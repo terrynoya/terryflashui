@@ -2,8 +2,6 @@ package com.terrynoya.common.control
 {
 	import com.terrynoya.common.core.IMTextField;
 	import com.terrynoya.common.core.MUIComponent;
-	
-	import flash.text.TextFormat;
 
 	/**
 	 * 
