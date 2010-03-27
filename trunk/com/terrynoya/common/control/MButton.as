@@ -68,6 +68,11 @@ package com.terrynoya.common.control
 			this.skin = value;
 		}
 		
+		protected function get currentSkin():DisplayObject
+		{
+			return this._currentSkin;
+		}
+		
 		protected function getSkinByPhase(phase:String):DisplayObject
 		{
 			var rlt:DisplayObject;

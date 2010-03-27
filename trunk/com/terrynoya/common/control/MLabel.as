@@ -128,6 +128,11 @@ package com.terrynoya.common.control
 			this._txtField.width = this._txtField.textWidth + 4;
 		}
 		
+		override public function get height():Number
+		{
+			return this._txtField.height;
+		}
+		
 		public function set border(value:Boolean):void
 		{
 			this._txtField.border = value;
