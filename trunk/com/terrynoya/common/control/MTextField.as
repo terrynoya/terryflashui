@@ -1,73 +1,78 @@
 package com.terrynoya.common.control
 {
 	import flash.text.TextField;
-	
+	import flash.text.TextFormat;
+	import flash.text.TextLineMetrics;
+
 	public class MTextField extends TextField
 	{
-		private var _explicitWidth:Number;
-		private var _text:String;
-		private var _htmlText:String;
-		private var _explicitHTMLText:String = null; 
+		private var _txtFormat:TextFormat;
+		
 		public function MTextField()
 		{
-			super(); 
+			super();
+			this.createChildren();
 		}
 		
-		public function set explicitWidth(value:Number):void
-    	{
-    		this._explicitWidth = value;
-    	}
-		
-		public function get explicitWidth():Number
-    	{
-    		return this._explicitWidth;
-    	}
-    	
-    	public function truncateToFit():Boolean
-    	{
-    		if(isHtml)
-    		{ 
-    			return false;
-    		}
-    		var s:String = super.text = this._text;
-    		while(s.length > 1 && this.textWidth > this.explicitWidth)
-    		{
-    			 s = s.slice(0, -1);
-    			super.text = s + "...";
-    		}
-    		return true;
-    	}
-    	
-    	override public function set text(value:String):void
+		override public function set text(value:String):void
 		{
-			this._text = value;
-			this._htmlText = null;
 			super.text = value;
-		} 
-		
-		override public function get text():String
-		{
-			return this.text;
+			this.updateView();
 		}
 		
-		override public function set htmlText(value:String):void
+		public function get color():uint
 		{
-			this._htmlText = value;
-			this._text = null;
-			
-			super.htmlText = value;
+			return uint(this._txtFormat.color);
 		}
 		
-		override public function get htmlText():String
+		public function set color(value:uint):void
 		{
-			return this.htmlText;
+			this._txtFormat.color = value;
+			this.updateView();
 		}
 		
-		private function get isHtml():Boolean
+		public function set font(value:String):void
 		{
-			return this._htmlText != null;
+			this._txtFormat.font = value;
+			this.updateView();
 		}
 		
+		public function get font():String
+		{
+			return this._txtFormat.font;
+		}  
+		
+		public function set fontSize(value:int):void
+		{
+			this._txtFormat.size = value;
+			this.updateView();
+		}
+		
+		public function get fontSize():int
+		{
+			return int(this._txtFormat.size);
+		}
+		
+		public function get underline():Boolean
+		{
+			return this._txtFormat.underline;
+		}
+		
+		public function set underline(value:Boolean):void
+		{
+			this._txtFormat.underline = value;
+			this.updateView();
+		}
+		
+		protected function createChildren():void
+		{
+			this._txtFormat = this.getTextFormat();
+		}
+		
+		protected function updateView():void
+		{
+			this.setTextFormat(this._txtFormat);
+		}
 		
 	}
 }

@@ -2,6 +2,8 @@ package com.terrynoya.common.control
 {
 	import com.terrynoya.common.core.IMTextField;
 	import com.terrynoya.common.core.MUIComponent;
+	
+	import flash.text.TextFormat;
 
 	/**
 	 * 
@@ -9,8 +11,7 @@ package com.terrynoya.common.control
 	 */
 	public class MLabel extends MUIComponent implements IMTextField
 	{
-		private var _txtField:MTextField2;
-		
+		private var _txtField:MTextField;
 		private var _isWidthSetted:Boolean = false;
 		/**
 		 * 
@@ -102,7 +103,7 @@ package com.terrynoya.common.control
 		override protected function createChildren():void
 		{
 			super.createChildren();
-			this._txtField = new MTextField2();
+			this._txtField = new MTextField();
 			this._txtField.selectable = false;
 			this.addChild(this._txtField);
 		}
@@ -124,7 +125,17 @@ package com.terrynoya.common.control
 				return;	
 			}
 			
-			this._txtField.width = this._txtField.textWidth + 2;
+			this._txtField.width = this._txtField.textWidth + 4;
+		}
+		
+		public function set border(value:Boolean):void
+		{
+			this._txtField.border = value;
+		}
+		
+		public function get border():Boolean
+		{
+			return this._txtField.border;
 		}
 	}
 }

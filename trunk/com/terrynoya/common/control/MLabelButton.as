@@ -34,7 +34,7 @@ package com.terrynoya.common.control
 		public function set text(value:String):void
 		{
 			this._label.text = value;
-			this._label.width = this.width;
+			this.width = this._label.width;
 			this.centerLabel();
 		}
 		

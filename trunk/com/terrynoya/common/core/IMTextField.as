@@ -9,6 +9,9 @@ package com.terrynoya.common.core
 		function get font():String
 		
 		function set fontSize(value:int):void
-		function get fontSize():int
+		function get fontSize():int;
+		
+		function set border(value:Boolean):void
+		function get border():Boolean;
 	}
 }
