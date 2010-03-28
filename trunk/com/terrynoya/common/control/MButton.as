@@ -20,7 +20,6 @@ package com.terrynoya.common.control
         private var _buttnPhase:String = MButtonPhase.UP;
         private var _currentSkin:DisplayObject;
 		private var _isMouseOver:Boolean = false;
-		
         public function MButton()
         {
             super();
@@ -33,7 +32,8 @@ package com.terrynoya.common.control
 
         override public function set width(value:Number):void
         {
-			this._currentSkin.width = value;
+        	this.skin.width = value;
+        	this.updateView();
         }
 		
         override public function set height(value:Number):void
@@ -49,9 +49,7 @@ package com.terrynoya.common.control
 		override protected function updateView():void
 		{
 			super.updateView();
-			
 			var skin:DisplayObject
-			
 			if (null == this._currentSkin)
 			{
 				skin = this.buttonSkin.upSkin;

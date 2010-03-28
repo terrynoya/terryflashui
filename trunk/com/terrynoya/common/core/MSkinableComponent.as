@@ -73,12 +73,6 @@ package com.terrynoya.common.core
 		override protected function updateView():void
 		{
 			super.updateView();
-//			if (this._skinDisplayed)
-//			{
-//				return;
-//			}
-//			this.addChild(this._skin);
-//			this._skinDisplayed=true;
 		}
 
 	}

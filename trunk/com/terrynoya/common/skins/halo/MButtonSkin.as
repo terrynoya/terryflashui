@@ -8,7 +8,7 @@ package com.terrynoya.common.skins.halo
 		private var cr:Number=4;
 		private var cr1:Number=Math.max(0, cornerRadius - 1);
 		private var cr2:Number=Math.max(0, cornerRadius - 2);
-
+		
 		public function MButtonSkin()
 		{
 			super();
@@ -145,11 +145,6 @@ package com.terrynoya.common.skins.halo
 				verticalGradientMatrix(1, 1, w - 2, h - 2));
 
 			return this;
-		}
-		
-		override protected function draw():void
-		{
-			this.upSkin;
 		}
 	}
 }
