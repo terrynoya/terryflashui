@@ -32,11 +32,17 @@ package com.terrynoya.common.control
             this.addEventListener(MouseEvent.CLICK, onClick);
         }
         
+        /**
+         * 设置宽度无效
+         */
         override public function set width(value:Number):void
         {
         	
         }
         
+        /**
+         * 设置高度无效
+         */
         override public function set height(value:Number):void
         {
         	
