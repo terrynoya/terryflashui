@@ -32,6 +32,16 @@ package com.terrynoya.common.control
             this.addEventListener(MouseEvent.CLICK, onClick);
         }
         
+        override public function set width(value:Number):void
+        {
+        	
+        }
+        
+        override public function set height(value:Number):void
+        {
+        	
+        }
+        
         /**
          * 设置Label的宽度
          */
