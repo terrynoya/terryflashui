@@ -6,6 +6,7 @@ package com.terrynoya.common.control
     
     import flash.display.DisplayObject;
     import flash.events.MouseEvent;
+    import flash.text.TextFormat;
 	
 	
 	
@@ -39,7 +40,11 @@ package com.terrynoya.common.control
         	this._label.width = value;
         	this.updateView();
         }
-
+        
+        public function set textFormat(value:TextFormat):void
+		{
+			this._label.textFormat = value;	
+		}
 
         /**
          * 按钮和文字之间的间隔

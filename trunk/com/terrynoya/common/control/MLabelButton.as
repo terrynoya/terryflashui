@@ -1,6 +1,6 @@
 package com.terrynoya.common.control
 {
-	import com.terrynoya.common.skins.halo.IMSkin;
+	import flash.text.TextFormat;
 
 	public class MLabelButton extends MButton
 	{
@@ -9,6 +9,11 @@ package com.terrynoya.common.control
 		public function MLabelButton()
 		{
 			super();
+		}
+		
+		public function set textFormat(value:TextFormat):void
+		{
+			this._label.textFormat = value;	
 		}
 		
 		override protected function createChildren():void

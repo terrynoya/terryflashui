@@ -27,6 +27,7 @@ package com.terrynoya.common.control
 		public function set textFormat(value:TextFormat):void
 		{
 			this._txtField.setTextFormat(value);
+			this.updateView();
 		}
 		
 		public function set multiLine(value:Boolean):void
