@@ -4,7 +4,7 @@ package com.terrynoya.common.core
 
 	/**
 	 * 所有拥有皮肤的组件的基类
-	 * 在组件初始化时拥有createSkin方法
+	 * 在组件初始化时createSkin
 	 * @author TerryYao
 	 */
 	public class MSkinableComponent extends MUIComponent
