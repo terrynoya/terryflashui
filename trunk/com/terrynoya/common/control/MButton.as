@@ -55,6 +55,7 @@ package com.terrynoya.common.control
         override public function set height(value:Number):void
         {
             this._currentSkin.height = value;
+           	this.updateView();
         }
 
         /**

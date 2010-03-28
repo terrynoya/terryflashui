@@ -14,6 +14,7 @@ package com.terrynoya.common.control
 		public function set textFormat(value:TextFormat):void
 		{
 			this._label.textFormat = value;	
+			this.updateView();
 		}
 		
 		override protected function createChildren():void
