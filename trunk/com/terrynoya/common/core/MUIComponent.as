@@ -14,6 +14,8 @@ package com.terrynoya.common.core
 		
 		private var _minHeight:Number;
 		
+		private var _id:String;
+		
 		/**
 		 * 
 		 */
@@ -22,7 +24,17 @@ package com.terrynoya.common.core
 			super();
 			this.createChildren();
 		}
-		 
+		
+		public function get id():String
+		{
+			return this._id;
+		}
+		
+		public function set id(value:String):void
+		{
+			this._id = value;
+		}
+		
 		/**
 		 * 
 		 * @return 

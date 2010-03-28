@@ -61,6 +61,14 @@ package com.terrynoya.common.util
 			
 		}
 		
+		public function clear():void
+		{
+			while(this._keyArr.length>0)
+			{
+				this.remove(this._keyArr.pop());
+			}
+		}
+		
 		public function remove(key:*):Boolean
 		{
 			if(!this.containsKey(key))
