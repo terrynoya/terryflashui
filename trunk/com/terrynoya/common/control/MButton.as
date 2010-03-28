@@ -2,16 +2,24 @@ package com.terrynoya.common.control
 {
     import com.terrynoya.common.core.MButtonPhase;
     import com.terrynoya.common.core.MSkinableComponent;
+    import com.terrynoya.common.events.MButtonEvent;
     import com.terrynoya.common.manager.MSkinManager;
     import com.terrynoya.common.skins.halo.MButtonSkin;
     
     import flash.display.DisplayObject;
     import flash.events.MouseEvent;
-
+	
+	[Event(name="button_down",type="com.terrynoya.common.events.MButtonEvent")]
+	
+	[Event(name="button_over",type="com.terrynoya.common.events.MButtonEvent")]
+	
+	[Event(name="button_click",type="com.terrynoya.common.events.MButtonEvent")]
+	
     public class MButton extends MSkinableComponent
     {
         private var _buttnPhase:String = MButtonPhase.UP;
         private var _currentSkin:DisplayObject;
+		private var _isMouseOver:Boolean = false;
 		
         public function MButton()
         {
@@ -19,7 +27,8 @@ package com.terrynoya.common.control
             this.addEventListener(MouseEvent.ROLL_OVER, onRollOver);
             this.addEventListener(MouseEvent.ROLL_OUT, onRollOut);
             this.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
-//            this.phase = MButtonPhase.UP;
+            this.addEventListener(MouseEvent.CLICK, onMouseClick);
+            
         }
 
         override public function set width(value:Number):void
@@ -98,11 +107,19 @@ package com.terrynoya.common.control
         private function onRollOver(e:MouseEvent):void
         {
             this.phase = MButtonPhase.OVER;
+           	this._isMouseOver = true;
+           	
+           	var evt:MButtonEvent = new MButtonEvent(MButtonEvent.BUTTON_OVER);
+           	this.dispatchEvent(evt);
         }
 
         private function onRollOut(e:MouseEvent):void
         {
             this.phase = MButtonPhase.UP;
+            this._isMouseOver = false;
+            
+            var evt:MButtonEvent = new MButtonEvent(MButtonEvent.BUTTON_OUT);
+           	this.dispatchEvent(evt);
         }
 
         private function set phase(value:String):void
@@ -114,6 +131,12 @@ package com.terrynoya.common.control
             this._buttnPhase = value;
             this.updateView();
         }
+        
+        private function onMouseClick(e:MouseEvent):void
+        {
+        	var evt:MButtonEvent = new MButtonEvent(MButtonEvent.BUTTON_CLICK);
+        	this.dispatchEvent(evt);
+        }
 
         private function getphase():String
         {
@@ -124,12 +147,15 @@ package com.terrynoya.common.control
         {
             this.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
             this.phase = MButtonPhase.DOWN;
+            
+            var evt:MButtonEvent = new MButtonEvent(MButtonEvent.BUTTON_DOWN);
+           	this.dispatchEvent(evt);
         }
 
         private function onMouseUp(e:MouseEvent):void
         {
             this.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-            this.phase = MButtonPhase.UP;
+            this.phase = this._isMouseOver?MButtonPhase.OVER:MButtonPhase.UP;
         }
 
     }

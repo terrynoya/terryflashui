@@ -4,6 +4,7 @@ package com.terrynoya.common.control
 	import com.terrynoya.common.core.MUIComponent;
 	
 	import flash.text.TextFieldAutoSize;
+	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
 
 	/**
@@ -22,6 +23,11 @@ package com.terrynoya.common.control
 		{
 			super();
 		} 
+		
+		public function set textFormat(value:TextFormat):void
+		{
+			this._txtField.setTextFormat(value);
+		}
 		
 		public function set multiLine(value:Boolean):void
 		{
