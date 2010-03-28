@@ -2,7 +2,6 @@ package com.terrynoya.common.control
 {
 	import flash.text.TextField;
 	import flash.text.TextFormat;
-	import flash.text.TextLineMetrics;
 
 	/**
 	 * 文本框
@@ -19,6 +18,11 @@ package com.terrynoya.common.control
 		{
 			super();
 			this.createChildren();
+		}
+		
+		public function get textFormat():TextFormat
+		{
+			return this._txtFormat;
 		}
 		
 		override public function set text(value:String):void

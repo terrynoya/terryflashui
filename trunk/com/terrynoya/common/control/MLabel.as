@@ -2,6 +2,9 @@ package com.terrynoya.common.control
 {
 	import com.terrynoya.common.core.IMTextField;
 	import com.terrynoya.common.core.MUIComponent;
+	
+	import flash.text.TextFieldAutoSize;
+	import flash.text.TextFormatAlign;
 
 	/**
 	 * 
@@ -11,12 +14,27 @@ package com.terrynoya.common.control
 	{
 		private var _txtField:MTextField;
 		private var _isWidthSetted:Boolean = false;
+		private var _multiLine:Boolean = false;
 		/**
 		 * 
 		 */
 		public function MLabel()
 		{
 			super();
+		} 
+		
+		public function set multiLine(value:Boolean):void
+		{
+			if(this._multiLine == value)
+			{
+				return;
+			}
+			var autoSize:String = value == true ? TextFieldAutoSize.LEFT:TextFieldAutoSize.NONE;
+			var txtFormatAlign:String = value == true ? TextFormatAlign.JUSTIFY:TextFormatAlign.LEFT; 
+			this._multiLine = value;
+			this._txtField.autoSize = autoSize;
+			this._txtField.wordWrap = value;
+			this._txtField.textFormat.align = txtFormatAlign;
 		}
 		
 		/**

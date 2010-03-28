@@ -25,7 +25,7 @@ package com.terrynoya.common.collection
 		public function addItem(item:Object):void
 		{
 //			this.data.push(item);
-			if(this.isBasicType(item)
+			if(this.isBasicType(item))
 			{
 				this.data.push(item);
 			}	
