@@ -61,8 +61,14 @@ package com.terrynoya.common.control
 			var btn:MRadioButton = MRadioButton(e.currentTarget);
 			if(btn.checked)
 			{
-				
+				this._radios.foreachValue(unSelect);
+				btn.checked = true;
 			}
+		}
+		
+		private function unSelect(btn:MRadioButton):void
+		{
+			btn.checked = false;
 		}
 	}
 }

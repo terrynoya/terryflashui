@@ -88,6 +88,12 @@ package com.terrynoya.common.util
 			return this._keyArr.length;
 		}
 		
-		
+		public function foreachValue(fun:Function):void
+		{
+			for each(var key:* in this._keyArr)
+			{
+				fun(this.getValue(key));
+			}
+		}
 	}
 }

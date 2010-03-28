@@ -51,6 +51,10 @@ package com.terrynoya.common.control
         	this.updateView();
         }
         
+        /**
+         * 
+         * @param value
+         */
         public function set textFormat(value:TextFormat):void
 		{
 			this._label.textFormat = value;	
@@ -100,6 +104,7 @@ package com.terrynoya.common.control
         public function set checked(value:Boolean):void
         {
             this._ischecked = value;
+            this.updateView();
         }
 
         override protected function createChildren():void
