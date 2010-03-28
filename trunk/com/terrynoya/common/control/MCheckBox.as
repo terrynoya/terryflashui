@@ -1,11 +1,15 @@
 package com.terrynoya.common.control
 {
+    import com.terrynoya.common.events.MCheckBoxEvent;
     import com.terrynoya.common.manager.MSkinManager;
     import com.terrynoya.common.skins.halo.MCheckBoxSkin;
     
     import flash.display.DisplayObject;
     import flash.events.MouseEvent;
-
+	
+	
+	
+	[Event(name="change",type="com.terrynoya.common.events.MCheckBoxEvent")]
     /**
      * 
      * @author TerryYao
@@ -98,6 +102,8 @@ package com.terrynoya.common.control
         private function toggle():void
         {
             this.checked = !this.checked;
+            var evt:MCheckBoxEvent = new MCheckBoxEvent(MCheckBoxEvent.CHANGE,this.checked);
+            this.dispatchEvent(evt);
             this.updateView();
         }
 
