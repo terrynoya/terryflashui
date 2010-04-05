@@ -30,6 +30,16 @@ package com.terrynoya.common.control
 			this.updateView();
 		}
 		
+		public function set editable(value:Boolean):void
+		{
+			this._txtField.editable = value;
+		}
+		
+		public function get editable():Boolean
+		{
+			return this._txtField.editable;
+		}
+		
 		public function set multiLine(value:Boolean):void
 		{
 			if(this._multiLine == value)

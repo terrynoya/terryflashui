@@ -38,6 +38,7 @@ package com.terrynoya.common.skins.halo
 			this.derStyles.themeColLgt=0x64ffff;
 			this.derStyles.fillColorPress1 = 0xd8f0ff;
 			this.derStyles.fillColorPress2 = 0x99d7ff;
+			
 		}
 		
 		override public function set width(value:Number):void

@@ -1,6 +1,7 @@
 package com.terrynoya.common.control
 {
 	import flash.text.TextField;
+	import flash.text.TextFieldType;
 	import flash.text.TextFormat;
 
 	/**
@@ -11,6 +12,8 @@ package com.terrynoya.common.control
 	{
 		private var _txtFormat:TextFormat;
 		
+		private var _editable:Boolean;
+		
 		/**
 		 * 
 		 */
@@ -18,6 +21,22 @@ package com.terrynoya.common.control
 		{
 			super();
 			this.createChildren();
+		}
+		
+		
+		public function set editable(value:Boolean):void
+		{
+			if(this._editable == value)
+			{
+				return;
+			}
+			this._editable = value;
+			this.type = value == true?TextFieldType.INPUT:TextFieldType.DYNAMIC;
+		}
+		
+		public function get editable():Boolean
+		{
+			return this._editable;
 		}
 		
 		public function get textFormat():TextFormat
