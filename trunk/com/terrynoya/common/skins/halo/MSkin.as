@@ -1,12 +1,11 @@
 package com.terrynoya.common.skins.halo
 {
+	import com.terrynoya.common.util.MColorUtil;
+	import com.terrynoya.common.util.MGraphicsUtil;
 	import flash.display.Graphics;
 	import flash.display.Shape;
 	import flash.geom.Matrix;
 	
-	import mx.utils.ColorUtil;
-	import mx.utils.GraphicsUtil;
-
 	public class MSkin extends Shape implements IMSkin
 	{
 		private static var tempMatrix:Matrix=new Matrix();
@@ -19,9 +18,9 @@ package com.terrynoya.common.skins.halo
 		protected var highlightAlphas:Array=[0.3, 0, 2];
 		protected var themeColor:uint=0xfdff;
 		protected var derStyles:Object;
-		protected var themeColorDrk1:Number=ColorUtil.adjustBrightness2(themeColor, -25);
+		protected var themeColorDrk1:Number=MColorUtil.adjustBrightness2(themeColor, -25);
 		protected var borderColors:Array = [borderColor, 0x898b8d];
-		protected var borderColorDrk1:Number=ColorUtil.adjustBrightness2(borderColor, -50);
+		protected var borderColorDrk1:Number=MColorUtil.adjustBrightness2(borderColor, -50);
 
 		public function MSkin()
 		{
@@ -126,7 +125,7 @@ package com.terrynoya.common.skins.halo
 			}
 			else
 			{
-				GraphicsUtil.drawRoundRectComplex(g, x, y, width, height, cornerRadius.tl, cornerRadius.tr, cornerRadius.bl, cornerRadius.br);
+				MGraphicsUtil.drawRoundRectComplex(g, x, y, width, height, cornerRadius.tl, cornerRadius.tr, cornerRadius.bl, cornerRadius.br);
 			}
 
 			// Carve a rectangular hole out of the middle of the rounded rect.
@@ -140,7 +139,7 @@ package com.terrynoya.common.skins.halo
 				}
 				else
 				{
-					GraphicsUtil.drawRoundRectComplex(g, hole.x, hole.y, hole.w, hole.h, holeR.tl, holeR.tr, holeR.bl, holeR.br);
+					MGraphicsUtil.drawRoundRectComplex(g, hole.x, hole.y, hole.w, hole.h, holeR.tl, holeR.tr, holeR.bl, holeR.br);
 				}
 			}
 
