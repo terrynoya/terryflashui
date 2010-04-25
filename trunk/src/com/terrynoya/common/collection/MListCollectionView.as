@@ -94,7 +94,7 @@ package com.terrynoya.common.collection
 		public function addItemAt(item:Object, index:int):void
 		{
 			this._list.addItemAt(item,index);
-		}
+		} 
 
 		public function getItemAt(index:int, prefetch:int=0):Object
 		{

@@ -1,6 +1,9 @@
 package com.terrynoya.common.core
 {
 	import com.terrynoya.common.skins.halo.IMSkin;
+	import com.terrynoya.common.skins.halo.MBackgroundSkin;
+	
+	import flash.display.DisplayObject;
 
 	/**
 	 * 所有拥有皮肤的组件的基类
@@ -67,7 +70,8 @@ package com.terrynoya.common.core
 		 */
 		protected function createSkin():void
 		{
-			 
+			 this._skin = new MBackgroundSkin();
+			 this.addChild(DisplayObject(this._skin));
 		}
 
 		override protected function updateView():void

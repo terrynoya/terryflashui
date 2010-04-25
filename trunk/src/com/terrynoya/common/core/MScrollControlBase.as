@@ -41,10 +41,6 @@ package com.terrynoya.common.core
 		
 		private var _visualHeight:Number = 100;
 		
-		private var _vScroll_Maximum:Number;
-		
-		private var _vScroll_pageSize:Number;
-		
 		/**
 		 * 
 		 * @param w

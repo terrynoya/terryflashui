@@ -5,7 +5,7 @@ package com.terrynoya.common.control
 	import com.terrynoya.common.events.MScrollEvent;
 
 	/**
-	 * TextArea
+	 * TextArea 
 	 * @author TerryYao
 	 */
 	public class MTextArea extends MScrollControlBase

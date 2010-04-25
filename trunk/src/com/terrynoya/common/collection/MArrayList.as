@@ -24,15 +24,15 @@ package com.terrynoya.common.collection
  
 		public function addItem(item:Object):void
 		{
-//			this.data.push(item);
-			if(this.isBasicType(item))
-			{
-				this.data.push(item);
-			}	
-			else
-			{
-				this.getDataFromObject(item);
-			}
+			this.data.push(item);
+//			if(this.isBasicType(item))
+//			{
+//				this.data.push(item);
+//			}	
+//			else
+//			{
+//				this.getDataFromObject(item);
+//			}
 //			var startIndex:int=this.data.length;
 //			var endIndex:int=this.data.length + newArr.length - 1;
 //			this.data=this.data.concat(newArr);

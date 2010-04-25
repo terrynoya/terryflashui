@@ -5,9 +5,5 @@ package com.terrynoya.common.core
 	{
 		function get data():Object;
 		function set data(value:Object):void;
-		function get selected():Boolean;
-		function set selected(value:Boolean):void;
-		function get hovered():Boolean;
-		function set hovered(value:Boolean):void;
 	}
 }
