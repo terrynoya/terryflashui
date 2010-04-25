@@ -102,7 +102,7 @@ package com.terrynoya.common.control.scrollClasses
 			}
 			this.value = value;
 
-			this.thumb.y = getXByValue(this._value);
+			this.thumb.y = getThumbPosByValue(this._value);
 			this._lstBarPoint=new Point(this.thumb.x, this.thumb.y);
 		}
 
@@ -161,6 +161,7 @@ package com.terrynoya.common.control.scrollClasses
 				return;
 			}
 			this._pageSize=value;
+			
 			this.updateView();
 		}
 
@@ -277,6 +278,9 @@ package com.terrynoya.common.control.scrollClasses
 			}
 			
 			this.thumb.height=th;
+			
+			this.thumb.y = this.getThumbPosByValue(this._value);
+			
 		}
 		
 		override public function set enabled(value:Boolean):void
@@ -404,7 +408,7 @@ package com.terrynoya.common.control.scrollClasses
 		 * value -> x
 		 * @private
 		 */
-		private function getXByValue(value:Number):Number
+		private function getThumbPosByValue(value:Number):Number
 		{
 			var offsetY:Number = (value - this.minimun) * (this.track.height - this.thumb.height) / (this.maximum - this.minimun);
 			var y:Number = offsetY + this.track.y;
