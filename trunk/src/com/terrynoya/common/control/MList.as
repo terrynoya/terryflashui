@@ -29,9 +29,9 @@ package com.terrynoya.common.control
 		 */
 		protected var maxRendererWidth:Number;
 
-		public function MList()
+		public function MList(w:Number,h:Number)
 		{
-			super();
+			super(w,h);
 			this.rowCount = 3;
 		}
 

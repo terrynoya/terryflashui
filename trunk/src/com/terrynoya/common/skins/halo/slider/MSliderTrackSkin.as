@@ -1,6 +1,7 @@
 package com.terrynoya.common.skins.halo.slider
 {
 	import com.terrynoya.common.skins.halo.MButtonSkin;
+	import com.terrynoya.common.util.MColorUtil;
 	
 	import flash.display.DisplayObject;
 	import flash.display.GradientType;
@@ -15,7 +16,7 @@ package com.terrynoya.common.skins.halo.slider
 			this.w = 200;
 			this.h = 4;
 			var borderColorDrk:Number =
-			ColorUtil.adjustBrightness2(borderColor, -50);
+			MColorUtil.adjustBrightness2(borderColor, -50);
 			graphics.clear();
 
 			drawRoundRect(0,0,w,h,0,0,0); // Draw a transparent rect to fill the entire space

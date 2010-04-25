@@ -14,14 +14,34 @@ package com.terrynoya.common.control.scrollClasses
 
 	[Event(name="scroll", type="com.terrynoya.common.events.MScrollEvent")]
 
+	/**
+	 * 滚动条
+	 * @author TerryYao
+	 */
 	public class MScrollBar extends MSkinableComponent
 	{
+		/**
+		 * 向上箭头
+		 * @default
+		 */
 		protected var upArrow:MButton;
 
+		/**
+		 * 向下箭头
+		 * @default
+		 */
 		protected var downArrow:MButton;
 
+		/**
+		 * 轨道
+		 * @default
+		 */
 		protected var track:MSkinableComponent;
 
+		/**
+		 * 拖动块
+		 * @default
+		 */
 		protected var thumb:MButton;
 
 		private var _minimun:Number=0;
@@ -41,70 +61,113 @@ package com.terrynoya.common.control.scrollClasses
 		private var _value:Number=0;
 
 		private var _snapInterval:Number;
-		
+
+		/**
+		 *
+		 */
 		public function MScrollBar()
 		{
 			super();
 			this.addListeners();
 			this._lstBarPoint=new Point(0, 0);
 		}
-		
+
+		/**
+		 *
+		 * @return
+		 */
 		public function get scrollPosition():Number
 		{
 			return this._value;
 		}
-		
+
+		/**
+		 *
+		 * @param value
+		 */
 		public function set scrollPosition(value:Number):void
 		{
-			if(this.maximum < value)
+			if (this.maximum < value)
 			{
 				value = this.maximum;
 			}
-			else if(this.minimun > value)
+			else if (this.minimun > value)
 			{
-				value = this.minimun;;	
+				value = this.minimun;
+				;
 			}
-			if(this._value == value)
+			if (this._value == value)
 			{
 				return;
 			}
-			this._value = value;
-			
+			this.value = value;
+
 			this.thumb.y = getXByValue(this._value);
 			this._lstBarPoint=new Point(this.thumb.x, this.thumb.y);
 		}
 
+		/**
+		 *
+		 * @return
+		 */
 		public function get direction():String
 		{
 			return this._direction;
 		}
 
+		/**
+		 *
+		 * @return
+		 */
 		public function get snapInerval():Number
 		{
 			return this._snapInterval;
 		}
 
+		/**
+		 *
+		 * @param value
+		 */
 		public function set snapInerval(value:Number):void
 		{
 			this._snapInterval=value;
 		}
 
+		/**
+		 *
+		 * @param value
+		 */
 		public function set direction(value:String):void
 		{
 			this._direction=value;
 		}
 
+		/**
+		 *
+		 * @param value
+		 */
 		public function set pageSize(value:Number):void
 		{
-			if (value == 0 || value == this.pageSize)
+			if(value <= 0)
+			{
+				value = 1;
+			}
+			else if(value > this._maximun)
+			{
+				value = this._maximun;
+			}
+			else if (value == this.pageSize)
 			{
 				return;
 			}
 			this._pageSize=value;
-
 			this.updateView();
 		}
 
+		/**
+		 *
+		 * @return
+		 */
 		public function get pageSize():Number
 		{
 			return this._pageSize;
@@ -120,7 +183,7 @@ package com.terrynoya.common.control.scrollClasses
 
 			this.track=new MButton();
 			this.track.skin = new MScrollTrackSkin();
-			
+
 			this.thumb=new MButton();
 			this.thumb.skin=new MScrollThumbSkin();
 			this.thumb.minHeight=20;
@@ -128,9 +191,13 @@ package com.terrynoya.common.control.scrollClasses
 			this.addChild(this.downArrow);
 			this.addChild(this.track);
 			this.addChild(this.thumb);
-			
+
 		}
 
+		/**
+		 *
+		 * @param value
+		 */
 		public function set maximum(value:Number):void
 		{
 			if (this._minimun == value)
@@ -138,20 +205,28 @@ package com.terrynoya.common.control.scrollClasses
 				return;
 			}
 			this._maximun=value;
-			
-			if(this.scrollPosition > value)
+
+			if (this.scrollPosition > value)
 			{
-				this.scrollPosition = value;	
+				this.scrollPosition = value;
 			}
-			
+
 			this.updateView();
 		}
 
+		/**
+		 *
+		 * @return
+		 */
 		public function get maximum():Number
 		{
 			return this._maximun;
 		}
-		
+
+		/**
+		 *
+		 * @param value
+		 */
 		public function set minimun(value:Number):void
 		{
 			if (this._maximun == value)
@@ -159,43 +234,66 @@ package com.terrynoya.common.control.scrollClasses
 				return;
 			}
 			this._minimun=value;
-			
-			if(this.scrollPosition < value)
+
+			if (this.scrollPosition < value)
 			{
-				this.scrollPosition = value;	
+				this.scrollPosition = value;
 			}
-			
+
 			this.updateView();
 		}
-		
+
+		/**
+		 *
+		 * @return
+		 */
 		public function get minimun():Number
 		{
 			return this._minimun;
 		}
 
 		override public function set width(value:Number):void
-		{	
-			
+		{
+
 		}
-		
+
 		override protected function updateView():void
 		{
 			super.updateView();
-			
-			if (this.maximum <= 0)
+
+			if (this.maximum <= 0 || this.pageSize >= this.maximum)
 			{
-				this.thumb.visible=false;
+				this.enabled = false;
 				return;
 			}
-			var totalpage:Number=Math.ceil((this._maximun - this.minimun) / this._pageSize);
 			
+			var totalpage:Number=Math.ceil((this._maximun - this.minimun) / this._pageSize);
+
 			var th:Number=this.track.height / totalpage;
 			
 			if (th < this.thumb.minHeight)
 			{
 				th=this.thumb.minHeight;
 			}
+			
 			this.thumb.height=th;
+		}
+		
+		override public function set enabled(value:Boolean):void
+		{
+			super.enabled = value;
+			
+			this.thumb.visible=value;
+			this.upArrow.enabled = value;
+			this.downArrow.enabled = value;
+			if(value)
+			{
+				this.addListeners();
+			}
+			else
+			{
+				this.removeListeners();
+			}
 		}
 
 		override public function set height(value:Number):void
@@ -210,11 +308,16 @@ package com.terrynoya.common.control.scrollClasses
 			this.thumb.addEventListener(MouseEvent.MOUSE_DOWN, onThumbPressHandler);
 			this.track.addEventListener(MouseEvent.MOUSE_DOWN,onTrackMouseDown);
 		}
+		
+		private function removeListeners():void
+		{
+			this.thumb.removeEventListener(MouseEvent.MOUSE_DOWN, onThumbPressHandler);
+			this.track.removeEventListener(MouseEvent.MOUSE_DOWN,onTrackMouseDown);
+		}
 
 		private function onThumbPressHandler(e:MouseEvent):void
 		{
 			this._mousedownPoint=this.globalToLocal(new Point(e.stageX, e.stageY));
-
 			this.addThumbDragListener();
 		}
 
@@ -223,7 +326,7 @@ package com.terrynoya.common.control.scrollClasses
 			this.stage.addEventListener(MouseEvent.MOUSE_MOVE, onThumbMove);
 			this.stage.addEventListener(MouseEvent.MOUSE_UP, onThumbUp);
 		}
-		
+
 		private function removeThumbDragListener():void
 		{
 			this.stage.removeEventListener(MouseEvent.MOUSE_MOVE, onThumbMove);
@@ -232,11 +335,15 @@ package com.terrynoya.common.control.scrollClasses
 
 		private function onThumbMove(e:MouseEvent):void
 		{
+			//当前鼠标的位置
 			var p:Point=this.globalToLocal(new Point(e.stageX, e.stageY));
+			
+			//当前鼠标位置和鼠标按下时的差值
 			var dp:Point=p.subtract(this._mousedownPoint);
-
+			
+			//和鼠标移动的位置对应的拖动条的位置
 			var ty:Number=dp.y + this._lstBarPoint.y;
-
+			
 			var maxlen:Number=this.track.height + this.track.y - this.thumb.height;
 
 			if (ty < this.track.y)
@@ -247,19 +354,25 @@ package com.terrynoya.common.control.scrollClasses
 			{
 				ty=maxlen;
 			}
-
-			this.thumb.y=ty;
 			
+			this.thumb.y=ty;
+
 			var val:Number=this.getValueByPos();
 
-			if (val != this._value)
-			{
-				this._value=val;
-				var evt:MScrollEvent=new MScrollEvent(MScrollEvent.SCROLL, val, this.direction);
-				this.dispatchEvent(evt);
-			}
+			this.value = val;
 		}
-					
+		
+		private function set value(value:Number):void
+		{
+			if (value == this._value)
+			{
+				return;		
+			}
+			this._value = value;
+			var evt:MScrollEvent=new MScrollEvent(MScrollEvent.SCROLL, value, this.direction);
+			this.dispatchEvent(evt);
+		}
+
 		private function getValueByPos():Number
 		{
 			var offsetX:Number=thumb.y - this.track.y;
@@ -286,7 +399,7 @@ package com.terrynoya.common.control.scrollClasses
 			}
 			return rlt;
 		}
-		
+
 		/**
 		 * value -> x
 		 * @private
@@ -297,13 +410,13 @@ package com.terrynoya.common.control.scrollClasses
 			var y:Number = offsetY + this.track.y;
 			return y;
 		}
- 
+
 		private function onThumbUp(e:MouseEvent):void
 		{
 			this.removeThumbDragListener();
 			this._lstBarPoint=new Point(this.thumb.x, this.thumb.y);
 		}
-		
+
 		private function onTrackMouseDown(e:MouseEvent):void
 		{
 			var thumbPoint:Point = this.track.globalToLocal(new Point(this.thumb.x,this.thumb.y));

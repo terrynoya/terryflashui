@@ -11,6 +11,7 @@ package com.terrynoya.common.core
 		function get y():Number;
 		function get width():Number;
 		function get height():Number;
-
-	}
+		function set mouseChildren(value:Boolean):void;
+		function set doubleClickEnabled(value:Boolean):void;
+	} 
 }

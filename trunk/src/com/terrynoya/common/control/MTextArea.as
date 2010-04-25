@@ -7,9 +7,9 @@ package com.terrynoya.common.control
 		private var _label:MLabel;
 		private var _defaultWidth:Number = 100;
 		
-		public function MTextArea()
+		public function MTextArea(w:Number,h:Number)
 		{
-			super();
+			super(w,h);
 		}
 		
 		override public function set width(value:Number):void

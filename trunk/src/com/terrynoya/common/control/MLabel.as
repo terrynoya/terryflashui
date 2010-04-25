@@ -30,6 +30,11 @@ package com.terrynoya.common.control
 			this.updateView();
 		}
 		
+		public function get textFormat():TextFormat
+		{
+			return this._txtField.textFormat;
+		}
+		
 		public function set editable(value:Boolean):void
 		{
 			this._txtField.editable = value;

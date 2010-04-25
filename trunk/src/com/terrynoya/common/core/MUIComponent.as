@@ -16,6 +16,7 @@ package com.terrynoya.common.core
 		
 		private var _id:String;
 		
+		private var _enabled:Boolean = true;
 		/**
 		 * 
 		 */
@@ -24,6 +25,21 @@ package com.terrynoya.common.core
 			super();
 			this.createChildren();
 		}
+		
+		public function set enabled(value:Boolean):void
+		{
+			if(this._enabled == value)
+			{
+				return;
+			}
+			this._enabled = value;
+		}
+				
+		public function get enabled():Boolean
+		{
+			return this._enabled;
+		}
+		
 		
 		public function get id():String
 		{

@@ -15,9 +15,9 @@ package com.terrynoya.common.core
 		
 		private var hScrollBar:MHScrollBar;
 		
-		protected var vScrollPolicy:String = MScrollBarPolicy.AUTO;
+		protected var _vScrollPolicy:String = MScrollBarPolicy.AUTO;
 		
-		protected var hScrollPolicy:String = MScrollBarPolicy.OFF;
+		protected var _hScrollPolicy:String = MScrollBarPolicy.OFF;
 		
 		protected var maskShape:Shape;
 		
@@ -29,11 +29,26 @@ package com.terrynoya.common.core
 		
 		private var _vScroll_pageSize:Number;
 		
-		public function MScrollControlBase()
+		public function MScrollControlBase(w:Number,h:Number)
 		{
 			super();
 			this.addListeners();
+			this.width = w; 
+			this.height = h;
 		} 
+		
+		
+		public function set vScrollPolicy(value:String):void
+		{
+			this._vScrollPolicy = value;	
+			this.vScrollBar.visible = this.vScrollShouldVisible;
+		}
+		
+		public function set hScrollPolicy(value:String):void
+		{
+			this._hScrollPolicy = value;	
+			this.hScrollBar.visible = this.hScrollShouldVisible;
+		}
 		
 		protected function set vScroll_Maximum(value:Number):void
 		{
@@ -151,14 +166,14 @@ package com.terrynoya.common.core
 		 */
 		private function get vScrollShouldVisible():Boolean
 		{
-			return this.vScrollPolicy == MScrollBarPolicy.ON ||
-				(this.vScrollPolicy == MScrollBarPolicy.AUTO && this.vScrollBar.maximum > 0);
+			return this._vScrollPolicy == MScrollBarPolicy.ON ||
+				(this._vScrollPolicy == MScrollBarPolicy.AUTO && this.vScrollBar.maximum > 0);
 		}
 		
 		private function get hScrollShouldVisible():Boolean
 		{
-			return this.hScrollPolicy == MScrollBarPolicy.ON ||
-				(this.hScrollPolicy == MScrollBarPolicy.AUTO && this.vScrollBar.maximum > 0);
+			return this._hScrollPolicy == MScrollBarPolicy.ON ||
+				(this._hScrollPolicy == MScrollBarPolicy.AUTO && this.vScrollBar.maximum > 0);
 		}
 		
 		private function updateMsk(w:Number, h:Number):void

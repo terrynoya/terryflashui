@@ -31,7 +31,7 @@ package com.terrynoya.common.control
             super();
             this.addEventListener(MouseEvent.CLICK, onClick);
         }
-        
+		
         /**
          * 设置宽度无效
          */
