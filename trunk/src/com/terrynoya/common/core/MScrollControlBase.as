@@ -154,16 +154,16 @@ package com.terrynoya.common.core
 		
 		private function addListeners():void
 		{
-			this.vScrollBar.addEventListener(MScrollEvent.SCROLL,scrollHandler);
-			this.hScrollBar.addEventListener(MScrollEvent.SCROLL,scrollHandler);
+			this.vScrollBar.addEventListener(MScrollEvent.SCROLL,vScrollHandler);
+			this.hScrollBar.addEventListener(MScrollEvent.SCROLL,hScrollHandler);
 			this.addEventListener(MouseEvent.MOUSE_WHEEL,onMouseWheel);
 		}
 		
 		
 		private function removeListeners():void
 		{
-			this.vScrollBar.removeEventListener(MScrollEvent.SCROLL,scrollHandler);
-			this.hScrollBar.removeEventListener(MScrollEvent.SCROLL,scrollHandler);
+			this.vScrollBar.removeEventListener(MScrollEvent.SCROLL,vScrollHandler);
+			this.hScrollBar.removeEventListener(MScrollEvent.SCROLL,hScrollHandler);
 			this.removeEventListener(MouseEvent.MOUSE_WHEEL,onMouseWheel);
 		}
 		
@@ -182,9 +182,17 @@ package com.terrynoya.common.core
 		 * 
 		 * @param e
 		 */
-		protected function scrollHandler(e:MScrollEvent):void
+		protected function vScrollHandler(e:MScrollEvent):void
 		{
-			this.updateView();
+			
+		}
+		
+		/**
+		 * 
+		 * @param e
+		 */
+		protected function hScrollHandler(e:MScrollEvent):void
+		{
 		}
 		
 		/**
@@ -196,11 +204,11 @@ package com.terrynoya.common.core
 		{
 			
 			this.updateScrollVisible();
-			if(this.vScrollShouldVisible && this.hScrollShouldVisible)
-			{
-				w -= this.vScrollBar.width;	
-				h -= this.vScrollBar.width;
-			}
+//			if(this.vScrollShouldVisible && this.hScrollShouldVisible)
+//			{
+//				w -= this.vScrollBar.width;	
+//				h -= this.vScrollBar.width;
+//			}
 			
 			this.vScrollBar.height = h;
 			this.hScrollBar.width = w; 

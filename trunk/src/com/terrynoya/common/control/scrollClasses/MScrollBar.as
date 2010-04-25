@@ -202,10 +202,11 @@ package com.terrynoya.common.control.scrollClasses
 		 */
 		public function set maximum(value:Number):void
 		{
-			if (this._minimun == value)
+			if (this._maximun == value)
 			{
 				return;
 			}
+			
 			this._maximun=value;
 
 			if (this.scrollPosition > value)
