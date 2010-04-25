@@ -3,8 +3,15 @@ package com.terrynoya.common.control
 	import com.terrynoya.common.control.scrollClasses.MScrollBar;
 	import com.terrynoya.common.control.scrollClasses.MScrollDirection;
 	
+	/**
+	 * 横向滚动条
+	 * @author TerryYao
+	 */
 	public class MHScrollBar extends MScrollBar
 	{
+		/**
+		 * 
+		 */
 		public function MHScrollBar()
 		{
 			super();

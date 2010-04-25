@@ -2,6 +2,7 @@ package com.terrynoya.common.control.scrollClasses
 {
 	import com.terrynoya.common.control.MButton;
 	import com.terrynoya.common.core.MSkinableComponent;
+	import com.terrynoya.common.events.MButtonEvent;
 	import com.terrynoya.common.events.MScrollEvent;
 	import com.terrynoya.common.skins.halo.scrollSkin.MScrollDownArrowSkin;
 	import com.terrynoya.common.skins.halo.scrollSkin.MScrollThumbSkin;
@@ -60,7 +61,7 @@ package com.terrynoya.common.control.scrollClasses
 
 		private var _value:Number=0;
 
-		private var _snapInterval:Number;
+		private var _snapInterval:Number = 1;
 
 		/**
 		 *
@@ -311,6 +312,8 @@ package com.terrynoya.common.control.scrollClasses
 		{
 			this.thumb.addEventListener(MouseEvent.MOUSE_DOWN, onThumbPressHandler);
 			this.track.addEventListener(MouseEvent.MOUSE_DOWN,onTrackMouseDown);
+			this.upArrow.addEventListener(MButtonEvent.BUTTON_CLICK,onArrowClick);
+			this.downArrow.addEventListener(MButtonEvent.BUTTON_CLICK,onArrowClick);
 		}
 		
 		private function removeListeners():void
@@ -428,7 +431,21 @@ package com.terrynoya.common.control.scrollClasses
 			var flipPageDown:int = mousePoint.subtract(thumbPoint).y < 0 ? -1:1;
 			this.scrollPosition += flipPageDown * this.pageSize;
 		}
-
+		
+		private function onArrowClick(e:MButtonEvent):void
+		{
+			var direction:int;
+			if(e.currentTarget == this.upArrow)
+			{
+				direction = -1;				
+			}
+			else if(e.currentTarget == this.downArrow)
+			{
+				direction = 1;
+			}
+			this.scrollPosition += direction * this.snapInerval;
+		}
+ 
 		private function layoutUI():void
 		{
 			this.track.y=this.upArrow.height;

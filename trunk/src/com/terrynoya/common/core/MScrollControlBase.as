@@ -9,16 +9,32 @@ package com.terrynoya.common.core
 	import flash.display.Shape;
 	import flash.events.MouseEvent;
 	
+	/**
+	 * 
+	 * @author TerryYao
+	 */
 	public class MScrollControlBase extends MUIComponent
 	{
 		private var vScrollBar:MVScrollBar;
 		
 		private var hScrollBar:MHScrollBar;
 		
+		/**
+		 * 纵向滚动策略
+		 * @default 
+		 */
 		protected var _vScrollPolicy:String = MScrollBarPolicy.AUTO;
 		
+		/**
+		 * 横向滚动策略
+		 * @default 
+		 */
 		protected var _hScrollPolicy:String = MScrollBarPolicy.OFF;
 		
+		/**
+		 * 
+		 * @default 
+		 */
 		protected var maskShape:Shape;
 		
 		private var _visualWidth:Number = 100;
@@ -29,6 +45,11 @@ package com.terrynoya.common.core
 		
 		private var _vScroll_pageSize:Number;
 		
+		/**
+		 * 
+		 * @param w
+		 * @param h
+		 */
 		public function MScrollControlBase(w:Number,h:Number)
 		{
 			super();
@@ -38,33 +59,57 @@ package com.terrynoya.common.core
 		} 
 		
 		
+		/**
+		 * 
+		 * @param value
+		 */
 		public function set vScrollPolicy(value:String):void
 		{
 			this._vScrollPolicy = value;	
 			this.vScrollBar.visible = this.vScrollShouldVisible;
 		}
 		
+		/**
+		 * 
+		 * @param value
+		 */
 		public function set hScrollPolicy(value:String):void
 		{
 			this._hScrollPolicy = value;	
 			this.hScrollBar.visible = this.hScrollShouldVisible;
 		}
 		
+		/**
+		 * 
+		 * @param value
+		 */
 		protected function set vScroll_Maximum(value:Number):void
 		{
 			this.vScrollBar.maximum = value;		
 		}
 		
+		/**
+		 * 
+		 * @param value
+		 */
 		protected function set vScroll_pageSize(value:Number):void
 		{
 			this.vScrollBar.pageSize = value;		
 		}
 		
+		/**
+		 * 
+		 * @param value
+		 */
 		protected function set vScroll_snapInerval(value:Number):void
 		{
 			this.vScrollBar.snapInerval = value;	
 		}
 		
+		/**
+		 * 
+		 * @return 
+		 */
 		protected function get vScroll_scrollPosition():Number
 		{
 			return this.vScrollBar.scrollPosition;	
@@ -122,6 +167,10 @@ package com.terrynoya.common.core
 			this.removeEventListener(MouseEvent.MOUSE_WHEEL,onMouseWheel);
 		}
 		
+		/**
+		 * 
+		 * @param e
+		 */
 		protected function onMouseWheel(e:MouseEvent):void
 		{
 			var direction:int = e.delta > 0 ? -1 : 1;
@@ -129,11 +178,20 @@ package com.terrynoya.common.core
 			this.updateView();
 		}
 		
+		/**
+		 * 
+		 * @param e
+		 */
 		protected function scrollHandler(e:MScrollEvent):void
 		{
 			this.updateView();
 		}
 		
+		/**
+		 * 
+		 * @param w
+		 * @param h
+		 */
 		protected function layoutBar(w:Number,h:Number):void
 		{
 			
@@ -153,6 +211,9 @@ package com.terrynoya.common.core
 			this.updateMsk(w,h);
 		}
 		
+		/**
+		 * 
+		 */
 		protected function updateScrollVisible():void
 		{
 			this.vScrollBar.visible = this.vScrollShouldVisible;
