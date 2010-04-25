@@ -60,7 +60,12 @@ package com.terrynoya.common.control
 		override protected function updateView():void
 		{
 			super.updateView();
-			this.vScroll_Maximum = this._label.height - this.height;
+			this.vScrollBar.maximum = this._label.height - this.height;
+			if(this.vScrollBar.maximum < 0)
+			{
+				this.height = this._label.height;
+			}
+			this.layoutBar(this.width,this.height);
 		}
 	}
 }

@@ -15,9 +15,9 @@ package com.terrynoya.common.core
 	 */
 	public class MScrollControlBase extends MUIComponent
 	{
-		private var vScrollBar:MVScrollBar;
+		protected var vScrollBar:MVScrollBar;
 		
-		private var hScrollBar:MHScrollBar;
+		protected var hScrollBar:MHScrollBar;
 		
 		/**
 		 * 纵向滚动策略
@@ -77,42 +77,6 @@ package com.terrynoya.common.core
 		{
 			this._hScrollPolicy = value;	
 			this.hScrollBar.visible = this.hScrollShouldVisible;
-		}
-		
-		/**
-		 * 
-		 * @param value
-		 */
-		protected function set vScroll_Maximum(value:Number):void
-		{
-			this.vScrollBar.maximum = value;		
-		}
-		
-		/**
-		 * 
-		 * @param value
-		 */
-		protected function set vScroll_pageSize(value:Number):void
-		{
-			this.vScrollBar.pageSize = value;		
-		}
-		
-		/**
-		 * 
-		 * @param value
-		 */
-		protected function set vScroll_snapInerval(value:Number):void
-		{
-			this.vScrollBar.snapInerval = value;	
-		}
-		
-		/**
-		 * 
-		 * @return 
-		 */
-		protected function get vScroll_scrollPosition():Number
-		{
-			return this.vScrollBar.scrollPosition;	
 		}
 			
 		override public function set width(value:Number) : void
@@ -204,11 +168,6 @@ package com.terrynoya.common.core
 		{
 			
 			this.updateScrollVisible();
-//			if(this.vScrollShouldVisible && this.hScrollShouldVisible)
-//			{
-//				w -= this.vScrollBar.width;	
-//				h -= this.vScrollBar.width;
-//			}
 			
 			this.vScrollBar.height = h;
 			this.hScrollBar.width = w; 
