@@ -1,6 +1,7 @@
 package com.terrynoya.common.control
 {
 	import com.terrynoya.common.core.MUIComponent;
+	import com.terrynoya.common.loader.MImageFactory;
 	
 	import flash.display.Bitmap;
 	
@@ -25,6 +26,7 @@ package com.terrynoya.common.control
 		public function set source(value:Bitmap):void
 		{
 			_source = value;
+			this.addChild(_source);
 		}
 
 		public function get url():String
@@ -39,7 +41,7 @@ package com.terrynoya.common.control
 				return;			
 			}
 			_url = value;
-			
+			MImageFactory.load(this);
 		}
 
 	}
