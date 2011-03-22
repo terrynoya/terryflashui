@@ -1,6 +1,7 @@
 package com.terrynoya.common.loader
 {
 	import flash.events.Event;
+	import flash.events.ProgressEvent;
 
 	public class MLoaderCore implements IMLoader
 	{
@@ -9,6 +10,10 @@ package com.terrynoya.common.loader
 		private var _data:Object;
 		
 		private var _status:int;
+		
+		private var _bytesLoaded:int;
+		
+		private var _bytesTotal:int;
 		
 		public function MLoaderCore()
 		{
@@ -60,5 +65,12 @@ package com.terrynoya.common.loader
 		{
 			this._status = MLoaderStatus.IO_ERROR;
 		}
+		
+		protected function onProgress(e:ProgressEvent):void
+		{
+			this._bytesLoaded = e.bytesLoaded;
+			this._bytesTotal = e.bytesTotal;
+		}
+		
 	}
 }

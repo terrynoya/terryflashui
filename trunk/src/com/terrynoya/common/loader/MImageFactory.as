@@ -31,27 +31,27 @@ package com.terrynoya.common.loader
 		{
 			var url:String = img.url;
 			var loadExist:Boolean = instance._loadMap.containsKey(url);
-			if(loadExist)
-			{
-				var ld:IMLoader = instance._loadMap.getValue(url);
-				switch(ld.status)
-				{
-					case MLoaderStatus.READY:
-						ld.load();
-						break;
-					case MLoaderStatus.COMPLETE:
-						img.dispatchEvent(new MImageEvent(MImageEvent.MIMAGE_LOAD_COMPLET));
-						break;
-					case MLoaderStatus.IO_ERROR:
-						img.dispatchEvent(new IOErrorEvent(IOErrorEvent.IO_ERROR));
-						break;
-				}
-			}
-			else
+			if(!loadExist)
 			{
 				var loader:MImageLoader = new MImageLoader();
 				loader.url = url;
-				instance._loadMap.put(url,loader);
+				instance._loadMap.put(url,loader);				
+			}
+			var ld:MImageLoader = instance._loadMap.getValue(url);
+			switch(ld.status)
+			{
+				case MLoaderStatus.READY:
+					ld.addImage(img);
+					ld.load();
+					break;
+				case MLoaderStatus.LOADING:
+					ld.addImage(img);
+				case MLoaderStatus.COMPLETE:
+					img.dispatchEvent(new MImageEvent(MImageEvent.MIMAGE_LOAD_COMPLET));
+					break;
+				case MLoaderStatus.IO_ERROR:
+					img.dispatchEvent(new IOErrorEvent(IOErrorEvent.IO_ERROR));
+					break;
 			}
 		}
 	}

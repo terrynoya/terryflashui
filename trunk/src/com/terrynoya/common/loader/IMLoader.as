@@ -9,5 +9,9 @@ package com.terrynoya.common.loader
 		function set status(value:int):void;
 		function set data(value:Object):void;
 		function get data():Object;
+		function set bytesLoaded(value:int):void;
+		function get bytesLoaded():int;
+		function set bytesTotal(value:int):void;
+		function get bytesTotal():int;
 	}	
 }
