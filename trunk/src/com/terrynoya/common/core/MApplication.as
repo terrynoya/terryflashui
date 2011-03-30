@@ -17,5 +17,15 @@ package com.terrynoya.common.core
 			this._stage.align = StageAlign.TOP_LEFT;
 			this._stage.scaleMode = StageScaleMode.NO_SCALE;
 		}
+		
+		override public function get width():Number
+		{
+			return this._stage != null ? this._stage.stageWidth : super.width;
+		}
+		
+		override public function get height():Number
+		{
+			return this._stage != null ? this._stage.stageHeight : super.height;
+		}
 	}
 }

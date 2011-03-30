@@ -47,12 +47,12 @@ package com.terrynoya.common.control.listClasses
 			this.addListeners();
 		}
 
-		public function get selected():Boolean
+		override public function get selected():Boolean
 		{
 			return this.selected;
 		}
 
-		public function set selected(value:Boolean):void
+		override public function set selected(value:Boolean):void
 		{
 			this._selected=value;
 //			this.setCurrentState(null);

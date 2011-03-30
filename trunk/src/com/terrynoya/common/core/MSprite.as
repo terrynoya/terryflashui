@@ -2,23 +2,17 @@ package com.terrynoya.common.core
 {
 	import flash.display.Sprite;
 
-	public class MSprite extends Sprite implements IMDisplayObject
+	public class MSprite extends Sprite implements IMDisplayObject,IDispose
 	{
-		protected var _toolTip:String;
 		
 		public function MSprite()
 		{
 			super();
 		}
 		
-		public function get toolTip():String
+		public function dispose():void
 		{
-			return this._toolTip;
-		}
-		
-		public function set toolTip(value:String):void
-		{
-			this._toolTip = value;
+			
 		}
 	}
 }
