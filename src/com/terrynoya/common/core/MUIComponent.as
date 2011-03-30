@@ -1,13 +1,14 @@
 package com.terrynoya.common.core
 {
 	use namespace melon_internal;
+	import com.terrynoya.common.control.IMPopup;
 	import com.terrynoya.common.manager.MStyleManager;
 
 	/**
 	 * 所有可视组件的基类
 	 * @author TerryYao
 	 */
-	public class MUIComponent extends MSprite
+	public class MUIComponent extends MSprite implements IMPopup
 	{
 		
 		private var _minWidth:Number;
@@ -17,6 +18,20 @@ package com.terrynoya.common.core
 		private var _id:String;
 		
 		private var _enabled:Boolean = true;
+		
+		private var _selected:Boolean;
+		
+		protected var _toolTip:String;
+		
+		public function get toolTip():String
+		{
+			return this._toolTip;
+		}
+		
+		public function set toolTip(value:String):void
+		{
+			this._toolTip = value;
+		}
 		/**
 		 * 
 		 */
@@ -26,6 +41,16 @@ package com.terrynoya.common.core
 			this.createChildren();
 		}
 		
+		public function get selected():Boolean
+		{
+			return _selected;
+		}
+
+		public function set selected(value:Boolean):void
+		{
+			_selected = value;
+		}
+
 		public function set enabled(value:Boolean):void
 		{
 			if(this._enabled == value)
@@ -80,6 +105,13 @@ package com.terrynoya.common.core
 			this.updateView();
 		}
 		
+		private function removeFromParent():void
+		{
+			if(this.parent != null)
+			{
+				this.parent.removeChild(this);
+			}
+		}
 		/**
 		 * 
 		 * @return 
@@ -104,6 +136,15 @@ package com.terrynoya.common.core
 		protected function createChildren():void
 		{
 			
+		}
+		
+		public function centerToParent():void
+		{
+			if(this.parent)
+			{
+				this.x = (parent.width - this.width)/2;
+				this.y = (parent.height - this.height)/2;
+			}
 		}
 
 		/**

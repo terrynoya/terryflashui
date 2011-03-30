@@ -20,6 +20,26 @@ package com.terrynoya.common.loader
 			
 		}
 		
+		public function get bytesTotal():int
+		{
+			return _bytesTotal;
+		}
+
+		public function set bytesTotal(value:int):void
+		{
+			_bytesTotal = value;
+		}
+
+		public function get bytesLoaded():int
+		{
+			return _bytesLoaded;
+		}
+
+		public function set bytesLoaded(value:int):void
+		{
+			_bytesLoaded = value;
+		}
+
 		public function get url():String
 		{
 			return _url;
