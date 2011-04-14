@@ -2,6 +2,7 @@ package com.terrynoya.common.control
 {
 	import com.terrynoya.common.control.alertClasses.MAlertForm;
 	import com.terrynoya.common.core.MUIComponent;
+	import com.terrynoya.common.manager.MPopupManager;
 	
 	import flash.display.DisplayObjectContainer;
 
@@ -54,8 +55,8 @@ package com.terrynoya.common.control
 		}
 
 		public static function show(title:String,message:String,
-									flags:uint = 0x4 /* Alert.OK */, 
 									parent:DisplayObjectContainer = null, 
+									flags:uint = 0x4 /* Alert.OK */, 
 									closeHandler:Function = null, 
 									iconClass:Class = null, 
 									defaultButtonFlag:uint = 0x4 /* Alert.OK */
@@ -64,6 +65,7 @@ package com.terrynoya.common.control
 			var alert:MAlert = new MAlert();
 			alert.text = message;
 			alert.title = title;
+			MPopupManager.addPopUp(alert,parent);
 		}
 	}
 }
