@@ -5,6 +5,7 @@ package com.terrynoya.common.manager
 	import com.terrynoya.common.skins.halo.MCheckBoxSkin;
 	import com.terrynoya.common.skins.halo.MRadioButtonSkin;
 	import com.terrynoya.common.skins.halo.MSliderSkin;
+	import com.terrynoya.common.skins.halo.progressBar.MProgressBarSkin;
 	
 	import flash.events.EventDispatcher;
 
@@ -29,6 +30,12 @@ package com.terrynoya.common.manager
 		public static function get buttonSkin():MButtonSkin
 		{
 			var bskin:MButtonSkin = new MButtonSkin();
+			return bskin;
+		}
+		
+		public static function get progressBarSkin():MProgressBarSkin
+		{
+			var bskin:MProgressBarSkin = new MProgressBarSkin();
 			return bskin;
 		}
 		

@@ -57,6 +57,8 @@ package com.terrynoya.common.control
 			this._txtField.autoSize = autoSize;
 			this._txtField.wordWrap = value;
 			this._txtField.textFormat.align = txtFormatAlign;
+			this._txtField.condenseWhite = this._multiLine;
+	
 		}
 		
 		/**
@@ -76,6 +78,12 @@ package com.terrynoya.common.control
 		public function get text():String
 		{
 			return this._txtField.text;
+		}
+		
+		public function set htmlText(value:String):void
+		{
+			this._txtField.htmlText = value;
+			this.updateView();
 		}
 		
 		/**

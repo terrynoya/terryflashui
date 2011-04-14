@@ -1,5 +1,7 @@
 package com.terrynoya.common.core
 {
+	import com.terrynoya.common.model.IMComponentModel;
+	import com.terrynoya.common.model.MComponentModel;
 	import com.terrynoya.common.skins.halo.IMSkin;
 	import com.terrynoya.common.skins.halo.MBackgroundSkin;
 	
@@ -16,6 +18,10 @@ package com.terrynoya.common.core
 		
 		private var _skinDisplayed:Boolean=false;
 		
+		private var _skinHolder:MUIComponent;
+		
+		
+		private var _model:IMComponentModel;
 		/**
 		 * 
 		 */
@@ -26,24 +32,49 @@ package com.terrynoya.common.core
 			this.updateView();
 		} 
 		
+		public function get model():IMComponentModel
+		{
+			return _model;
+		}
+
+		public function set model(value:IMComponentModel):void
+		{
+			_model = value;
+		}
+
+		protected function get skinHolder():MUIComponent
+		{
+			return _skinHolder;
+		}
+
+		override protected function createChildren():void
+		{
+			super.createChildren();
+			this._model = new MComponentModel();
+			this._skinHolder = new MUIComponent();
+			this.addChild(this._skinHolder);
+		}
+		
 		override public function set width(value:Number) : void
 		{
-			this._skin.width = value;
+			this._model.width = value;
+			this.resizeSkin();
 		}
 		
 		override public function get width():Number
 		{
-			return this._skin.width;
+			return this._model.width;
 		}
 		
 		override public function get height():Number
 		{
-			return this._skin.height;
+			return this._model.height; 
 		} 
 		
 		override public function set height(value:Number) : void
 		{
-			this._skin.height = value;
+			this._model.height = value;
+			this.resizeSkin();
 		}
 		
 		/**
@@ -53,7 +84,14 @@ package com.terrynoya.common.core
 		public function set skin(value:IMSkin):void
 		{
 			this._skin=value;
+			this.onSetSkin(value);
+			this.renderSkin();
 			this.updateView();
+		}
+		
+		protected function onSetSkin(value:IMSkin):void
+		{
+			
 		}
 
 		/**
@@ -71,13 +109,20 @@ package com.terrynoya.common.core
 		protected function createSkin():void
 		{
 			 this._skin = new MBackgroundSkin();
-			 this.addChild(DisplayObject(this._skin));
+			 this.renderSkin();
 		}
-
-		override protected function updateView():void
+		
+		public function renderSkin():void
 		{
-			super.updateView();
+			this._skinHolder.removeAllChildren();
+			this._skinHolder.addChild(DisplayObject(this._skin));
+			this.resizeSkin();	
+		} 
+		
+		protected function resizeSkin():void
+		{
+			this._skin.width = this._model.width;
+			this._skin.height = this._model.height;	
 		}
-
 	}
 }
