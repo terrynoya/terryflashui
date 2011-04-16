@@ -6,32 +6,33 @@ package com.terrynoya.common.control
 	
 	import flash.display.DisplayObjectContainer;
 
-	public class MAlert extends MUIComponent
+	public class MAlert
 	{
-		public static const OK:uint = 1;
+		public static const OK:uint = 0x0001;
 		
-		public static const CANCEL:uint = 2;
+		public static const CANCEL:uint = 0x0002;
 		
-		public static const YES:uint = 4;
+		public static const YES:uint = 0x0004;
 		
-		public static const NO:uint = 8;
+		public static const NO:uint = 0x0008;
+		
+		public static var okLabel:String;
+		
+		public static var cancelLabel:String;
+		
+		public static var yesLabel:String;
+		
+		public static var noLabel:String;
 		
 		private var _title:String;
 		
 		private var _text:String;
 		
-		private var _alertForm:MAlertForm;
+		public var buttonFlags:uint = OK;
 		
 		public function MAlert()
 		{
 			super();
-		}
-		
-		override protected function createChildren():void
-		{
-			super.createChildren();
-			this._alertForm = new MAlertForm();
-			this.addChild(this._alertForm);
 		}
 		
 		public function get title():String
@@ -55,9 +56,9 @@ package com.terrynoya.common.control
 		}
 
 		public static function show(title:String,message:String,
-									parent:DisplayObjectContainer = null, 
 									flags:uint = 0x4 /* Alert.OK */, 
 									closeHandler:Function = null, 
+									parent:DisplayObjectContainer = null, 
 									iconClass:Class = null, 
 									defaultButtonFlag:uint = 0x4 /* Alert.OK */
 								):void
@@ -65,7 +66,9 @@ package com.terrynoya.common.control
 			var alert:MAlert = new MAlert();
 			alert.text = message;
 			alert.title = title;
-			MPopupManager.addPopUp(alert,parent);
+			alert.buttonFlags = flags;
+			var alertForm:MAlertForm = new MAlertForm(title,message,flags);
+			MPopupManager.addPopUp(alertForm,parent);
 		}
 	}
 }

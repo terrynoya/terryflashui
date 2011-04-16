@@ -9,7 +9,7 @@ package com.terrynoya.common.control
 		public function MLabelButton()
 		{
 			super();
-		}
+		} 
 		
 		public function set textFormat(value:TextFormat):void
 		{
@@ -19,14 +19,14 @@ package com.terrynoya.common.control
 		
 		override protected function createChildren():void
 		{
+			super.createChildren();
 			this._label = new MLabel();
 			this.addChild(this._label);
-		}
+		} 
 		
 		override public function set width(value:Number):void
 		{
 			super.width = value;
-			this._label.width = value;
 			this.centerLabel();
 		} 
 		
@@ -40,7 +40,6 @@ package com.terrynoya.common.control
 		public function set text(value:String):void
 		{
 			this._label.text = value;
-			this.width = this._label.width;
 			this.centerLabel();
 		}
 		
@@ -53,8 +52,8 @@ package com.terrynoya.common.control
 		
 		private function centerLabel():void
 		{
-			this._label.x = (this.width - this._label.width) / 2;
-			this._label.y = (this.height - this._label.height) / 2;
+			this._label.x = (super.width - this._label.width) / 2;
+			this._label.y = (super.height - this._label.height) / 2;
 		} 
 	}
 }
