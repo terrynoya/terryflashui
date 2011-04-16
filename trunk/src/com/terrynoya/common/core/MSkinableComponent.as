@@ -50,8 +50,8 @@ package com.terrynoya.common.core
 		override protected function createChildren():void
 		{
 			super.createChildren();
-			this._model = new MComponentModel();
 			this._skinHolder = new MUIComponent();
+			this._model = new MComponentModel();
 			this.addChild(this._skinHolder);
 		}
 		
@@ -123,6 +123,7 @@ package com.terrynoya.common.core
 		{
 			this._skin.width = this._model.width;
 			this._skin.height = this._model.height;	
+			this.updateView();
 		}
 	}
 }

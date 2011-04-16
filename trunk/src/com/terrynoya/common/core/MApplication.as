@@ -1,5 +1,7 @@
 package com.terrynoya.common.core
 {
+	import com.terrynoya.common.manager.MSystemManager;
+	
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	import flash.display.Stage;
@@ -13,7 +15,8 @@ package com.terrynoya.common.core
 		public function MApplication()
 		{
 			super();
-			this._stage = this.stage
+			this._stage = this.stage;
+			MSystemManager.stage = this.stage; 
 			this._stage.align = StageAlign.TOP_LEFT;
 			this._stage.scaleMode = StageScaleMode.NO_SCALE;
 		}
